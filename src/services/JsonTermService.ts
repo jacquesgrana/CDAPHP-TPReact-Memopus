@@ -1,3 +1,5 @@
+import ITerm from "../interfaces/ITerm";
+
 export default class JsonTermService {
     private _url: string = "http://localhost:3001/";
     //private _urlUsers: string = this._url + "users";
@@ -5,11 +7,22 @@ export default class JsonTermService {
     private _urlTerms: string = this._url + "terms";
     //private _urlCards: string = this._url + "cards";
 
-    private _instance: JsonTermService | null = null;
+    private static _instance: JsonTermService | null = null;
 
     private constructor() {}
 
-    public getInstance(): JsonTermService {
+    public static getInstance(): JsonTermService {
         return this._instance === null ? new JsonTermService() : this._instance;
+    }
+
+    public async loadTerms(): Promise<ITerm[] | null> {
+        try {
+            const response = await fetch(this._urlTerms);
+            const terms = await response.json();
+            return terms;
+        } catch (e) {
+            console.error(e);
+            return null;
+        }
     }
 }

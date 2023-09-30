@@ -1,9 +1,11 @@
 import IColumn from "../interfaces/IColumn";
 import { useEffect, useState } from "react";
 import JsonColumnService from "../services/JsonColumnService";
+import JsonTermService from "../services/JsonTermService";
+import ITerm from "../interfaces/ITerm";
 
 
-const Column = (props: any) => {
+const Column = () => {
 
     const [columns, setColumns] = useState<IColumn[] | null>(null);
 
@@ -17,14 +19,14 @@ const Column = (props: any) => {
     }, []);
 
     //const columns: any = useLoaderData();
-    console.log('column component : columns :', props.columns);
+    //console.log('column component : columns :', props.columns);
     return (
         <div className="">
         <h4 className="text-center">Colonnes</h4>
         <div className="d-flex gap-3">
             { 
             columns?.map((c: IColumn) => {
-                return <button key={c.id} className="btn btn-success">{c.label}</button>
+                return <button key={c.id} className="btn btn-primary">{c.label}</button>
             })
         }
         </div>

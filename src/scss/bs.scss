@@ -7,3 +7,13 @@
     background-color: $success-light;
     border: 1px solid $success;
 }
+
+.btn-primary {
+    background-color: $primary;
+    border: 1px solid $primary;
+}
+
+.btn-primary:hover {
+    background-color: $primary-light;
+    border: 1px solid $primary;
+}
