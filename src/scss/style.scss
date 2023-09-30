@@ -3,7 +3,8 @@ header,
 main,
 footer,
 #root,
-#container_all {
+#container_all,
+* {
     margin: 0;
     padding: 0;
 }
@@ -22,6 +23,7 @@ body {
 
 header {
     margin-bottom: 40px;
+    padding-top: 20px;
     width: 100%;
     height: 100px;
     background-color: $success;
@@ -32,6 +34,13 @@ main {
 }
 
 footer {
+    padding-top: 20px;
     height: 60px;
     background-color: $success;
+}
+
+.div-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

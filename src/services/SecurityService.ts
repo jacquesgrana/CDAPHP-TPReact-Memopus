@@ -6,10 +6,7 @@ export default class SecurityService{
     private constructor() {}
 
     public static getIntance(): SecurityService {
-        if(SecurityService._instance === null) {
-            return new SecurityService();
-        }
-        return SecurityService._instance;
+        return this._instance === null ? new SecurityService() : this._instance;
     }
 
     public get isLogged(): boolean {

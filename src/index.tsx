@@ -18,15 +18,10 @@ const security = SecurityService.getIntance();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-    <Route path="/" element={<App />}>
-    <Route path="" element={
-        <PrivateRoute>
-          <Home />
-        </PrivateRoute>
-      } />
-      <Route path="/connect" element={<Connect />} />
-    </Route></>
+    <Route path="" element={<App />}>
+    <Route path="/connect" element={<Connect />} />
+    <Route path="*" element={<Home />} />
+    </Route>
   )
 )
 
