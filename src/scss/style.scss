@@ -44,3 +44,39 @@ footer {
     flex-direction: column;
     align-items: center;
 }
+
+.form-connect {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+    background-color: $success-light;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid $success;
+}
+
+.div-form-input {
+    display: flex;
+    gap: 15px;
+    width: 600px;
+    justify-content: end;
+    align-items: end;
+}
+
+.div-form-input-label {
+    width: 200px;
+    color: $success;
+    text-align: end;
+}
+
+.div-form-input-input {
+    color: $success;
+    border: 1px solid $success;
+}
+
+.div-form-input-input:focus {
+    border: 1px solid $success;
+    box-shadow: 0 1px 1px $success inset, 0 0 8px $success;
+    outline: 0 none;
+}
