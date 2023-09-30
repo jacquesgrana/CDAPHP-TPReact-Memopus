@@ -3,27 +3,34 @@ import ReactDOM from 'react-dom/client';
 //import './index.css';
 import './scss/index.scss';
 import App from './components/App';
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { useNavigate, ActionFunctionArgs, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import SecurityService from './services/SecurityService';
 import Home from './components/Home';
 import Connect from './components/Connect';
-import { PrivateRoute } from './utils/PrivateRoute'
 //import reportWebVitals from './reportWebVitals';
+import { actionLogin } from './actions/security'
+import loaderColumns from './loaders/ColumLoader';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const security = SecurityService.getIntance();
+const security = SecurityService.getInstance();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    <>
     <Route path="" element={<App />}>
     <Route path="/connect" element={<Connect />} />
-    <Route path="*" element={<Home />} />
+    <Route path="*" element={<Home />} >
     </Route>
+    </Route>
+    <Route path="/login" action={actionLogin} />
+    </>
   )
 )
+
+
 
 root.render(
   <React.StrictMode>

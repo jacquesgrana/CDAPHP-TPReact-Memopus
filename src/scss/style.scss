@@ -61,12 +61,12 @@ footer {
     gap: 15px;
     width: 600px;
     justify-content: end;
-    align-items: end;
+    align-items: center;
 }
 
 .div-form-input-label {
     width: 200px;
-    color: $success;
+    color: white;
     text-align: end;
 }
 
@@ -76,6 +76,7 @@ footer {
 }
 
 .div-form-input-input:focus {
+    color: $success;
     border: 1px solid $success;
     box-shadow: 0 1px 1px $success inset, 0 0 8px $success;
     outline: 0 none;
