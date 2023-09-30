@@ -27,13 +27,15 @@ const Term = () => {
     //console.log('column component : columns :', props.columns);
     return (
         <div className="">
-        <h4 className="text-center">Termes</h4>
+        <h4 className="text-center my-3">Termes</h4>
         <div className="d-flex gap-3">
             { 
             terms?.map((t: ITerm) => {
-                return <button key={t.id} className="btn btn-primary">{t.name}</button>
+                return <button key={t.id} className="btn btn-warning">{t.name}</button>
             })
+            
         }
+        <button key={0} className="btn btn-warning">TOUS</button>
         </div>
         </div>
     );

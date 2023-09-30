@@ -17,3 +17,13 @@
     background-color: $primary-light;
     border: 1px solid $primary;
 }
+
+.btn-warning {
+    background-color: $warning;
+    border: 1px solid $warning;
+}
+
+.btn-warning:hover {
+    background-color: $warning-light;
+    border: 1px solid $warning;
+}

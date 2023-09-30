@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom/client';
 //import './index.css';
 import './scss/index.scss';
 import App from './components/App';
-import { useNavigate, ActionFunctionArgs, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import SecurityService from './services/SecurityService';
 import Home from './components/Home';
 import Connect from './components/Connect';
 //import reportWebVitals from './reportWebVitals';
 import { actionLogin } from './actions/security'
-import loaderColumns from './loaders/ColumLoader';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

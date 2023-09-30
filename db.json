@@ -63,7 +63,7 @@
       "id": 22,
       "question": "Qui est l'inventeur de javascript ?",
       "answer": "Brendan Eich",
-      "column": 1,
+      "column": 2,
       "selected": false,
       "tid": 194
     },
@@ -71,7 +71,7 @@
       "id": 33,
       "question": "Sous quelle marque a été développé React ?",
       "answer": "FaceBook",
-      "column": 1,
+      "column": 4,
       "selected": false,
       "tid": 586
     }
