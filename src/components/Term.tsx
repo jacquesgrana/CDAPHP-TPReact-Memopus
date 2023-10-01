@@ -39,7 +39,7 @@ const Term = (props: any) => {
              props.setTerm("TOUS");
              term.current = "TOUS";
         }}>TOUS</button>
-        <button className="btn btn-primary">+</button>
+        <button className="btn btn-success">+</button>
         </div>
         </div>
     );

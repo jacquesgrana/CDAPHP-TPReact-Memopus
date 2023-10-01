@@ -11,7 +11,7 @@ const Column = (props: any) => {
           <div key={props.column.id} className="btn btn-warning btn-column">
             {props.column.label}
           </div>
-          <button className="btn btn-primary">+</button>
+          <button className="btn btn-success">+</button>
           </div>
           {
             props.column.cards.map((c: ICard) => {

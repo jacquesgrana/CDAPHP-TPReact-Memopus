@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SecurityService from '../services/SecurityService';
 import { ToastContainer } from 'react-toastify';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   const navigate = useNavigate();
@@ -17,20 +19,23 @@ function App() {
   return (
     <div className="App container" id="container_all">
       <ToastContainer />
-      <header>
-        <h1 className='text-center'>Header</h1>
-      </header>
+      <Header></Header>
       <main>
-        <main>
         <Outlet />
       </main>
-      </main>
-      <footer>
-      <h2 className='text-center'>Footer</h2>
-      </footer>
+      <Footer></Footer>
       
     </div>
   );
 }
 
 export default App;
+/*
+      <header>
+        <h1 className='text-center'>Header</h1>
+      </header>
+
+      <footer>
+        <h2 className='text-center'>Footer</h2>
+      </footer>
+*/
