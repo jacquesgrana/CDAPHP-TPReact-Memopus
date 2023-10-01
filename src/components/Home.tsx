@@ -8,11 +8,18 @@ import Term from "./Term";
 
 const Home = () => {
 
+    const [term, setTerm] = useState<string>("TOUS");
+
+    function setTermFilter(term: string) {
+        setTerm(term);
+        console.log('callback home');
+    }
+
     return (
         <div className="div-container">
         <h3>Page Accueil</h3>
-        <Term></Term>
-        <Columns></Columns>
+        <Term setTerm={setTermFilter}></Term>
+        <Columns term={term}></Columns>
         </div>
     );
 }

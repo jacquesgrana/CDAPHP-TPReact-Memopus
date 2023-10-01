@@ -1,12 +1,23 @@
+import ICard from "../interfaces/ICard";
 
 const Column = (props: any) => {
-
-    // faire interface pour type les props
+    // TODO utiliser un useState et un useEffect pour column ?
+    
+    // TODO faire interface pour typer les props
     return (
-        <div key={props.column.id} className="">
-          <button key={props.column.id} className="btn btn-primary">
+        <div className="div-column">
+          <div key={props.column.id} className="btn btn-primary div-btn-column">
             {props.column.label}
-          </button>
+          </div>
+          {
+            props.column.cards.map((c: ICard) => {
+                return(
+                    <div key={c.id} className="div-card">
+                        <p className="p-card-question">{c.question}</p>
+                    </div>
+                )
+            })
+          }
         </div>
       );
 }

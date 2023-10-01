@@ -1,7 +1,7 @@
 import IUser from "../interfaces/IUser";
 import JsonUserService from "./JsonUserService";
 
-export default class SecurityService{
+export default class SecurityService {
     private _isLogged: boolean = false;
     private _id: string | null = null;
     private _username: string | null = null;

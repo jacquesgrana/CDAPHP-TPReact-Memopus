@@ -5,11 +5,15 @@ import JsonCardService from "../services/JsonCardService";
 import ICard from "../interfaces/ICard";
 import JsonTermService from "../services/JsonTermService";
 import Column from "./Column";
+import ITerm from "../interfaces/ITerm";
 
-const Columns = () => {
+const Columns = (props: any) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
+    const [terms, setTerms] = useState<ITerm[] | null>(null);
+    const [term, setTerm] = useState<string>("TOUS");
+
     const dataLoaded = useRef(false);
-  
+    
     useEffect(() => {
       const columnService = JsonColumnService.getInstance();
       const cardService = JsonCardService.getInstance();
@@ -41,6 +45,8 @@ const Columns = () => {
 
           // si les tableaux loadedTerms et loadedColumns sont non null
           if(loadedColumns !== null && loadedTerms !== null && columnsCopy.length > 0) {
+            // TODO mettre ailleurs ?
+            setTerms(loadedTerms);
             // boucle sur les columnsCopy
 
             columnsCopy.forEach(column => {
@@ -70,9 +76,9 @@ const Columns = () => {
   
           setColumns(columnsCopy);
           dataLoaded.current = true;
-          console.log('terms :', loadedTerms);
-          console.log('cards :', loadedCards);
-          console.log('columns :', columnsCopy);
+          //console.log('terms :', loadedTerms);
+          //console.log('cards :', loadedCards);
+          //console.log('columns :', columnsCopy);
         }
       };
   
@@ -86,10 +92,11 @@ const Columns = () => {
     return (
       <div className="">
         <h4 className="text-center my-3">Colonnes</h4>
+        <h5 className="text-center my-2">Filtre : {props.term}</h5>
         <div className="d-flex gap-3">
           {columns?.map((c: IColumn) => {
             return (
-              <Column column={c}></Column>
+              <Column key={c.id} column={c} terms={terms}></Column>
             );
             
           })}

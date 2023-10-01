@@ -1,21 +1,19 @@
-import IColumn from "../interfaces/IColumn";
 import { useEffect, useState } from "react";
-import JsonColumnService from "../services/JsonColumnService";
 import ITerm from "../interfaces/ITerm";
 import JsonTermService from "../services/JsonTermService";
 
 // TODO passer terms dans props ?
-const Term = () => {
+const Term = (props: any) => {
     const [terms, setTerms] = useState<ITerm[] | null>(null);
-
+    const [term, setTerm] = useState<string>("TOUS");
 
     useEffect(() => { 
         const termService = JsonTermService.getInstance();
-        const loadTerm = async () => {
+        const loadTerms = async () => {
             const loadedColumns = await termService.loadTerms();
             setTerms(loadedColumns);
         }
-        loadTerm();
+        loadTerms();
     }, []);
 
    
@@ -28,11 +26,17 @@ const Term = () => {
         <div className="d-flex gap-3">
             { 
             terms?.map((t: ITerm) => {
-                return <button key={t.id} className="btn btn-warning">{t.name}</button>
+                return <button onClick={(e) =>  {
+                    setTerm(t.name);
+                    props.setTerm(t.name);
+                }} key={t.id} className="btn btn-warning">{t.name}</button>
             })
             
         }
-        <button key={0} className="btn btn-warning">TOUS</button>
+        <button key={0} className="btn btn-warning" onClick={(e) => {
+             setTerm("TOUS");
+             props.setTerm("TOUS");
+        }}>TOUS</button>
         </div>
         </div>
     );

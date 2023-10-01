@@ -81,3 +81,33 @@ footer {
     box-shadow: 0 1px 1px $success inset, 0 0 8px $success;
     outline: 0 none;
 }
+
+.div-column {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+.div-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: $success-light;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 120px;
+}
+
+.div-btn-column {
+    width: 20vw;
+}
+
+.p-card-question {
+    color: white;
+}
