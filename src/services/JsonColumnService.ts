@@ -17,7 +17,11 @@ export default class JsonColumnService {
 
     public async loadColumns(): Promise<IColumn[] | null> {
         try {
-            const response = await fetch(this._urlColumns);
+            const response = await fetch(this._urlColumns, {
+                headers: {
+                  'Cache-Control': 'no-cache',
+                }
+              });
             const columns = await response.json();
             return columns;
         } catch (e) {

@@ -17,7 +17,12 @@ export default class JsonCardService {
 
     public async loadCards(): Promise<ICard[] | null> {
         try {
-            const response = await fetch(this._urlCards);
+            const response = await fetch(this._urlCards, {
+                headers: {
+                  'Cache-Control': 'no-cache',
+                }
+              })
+              
             const cards = await response.json();
             return cards;
         } catch (e) {

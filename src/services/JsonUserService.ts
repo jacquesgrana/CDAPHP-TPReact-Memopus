@@ -31,7 +31,11 @@ export default class JsonUserService {
 
     /** a tester, pas sur que ca marche */
     public async loadByUsername(username: string): Promise<IUser[] | void> {
-        return fetch(`${this._urlUsers}?username=${username}`)
+        return fetch(`${this._urlUsers}?username=${username}`, {
+            headers: {
+              'Cache-Control': 'no-cache',
+            }
+          })
         .then(response => {
             return response.json();
         })

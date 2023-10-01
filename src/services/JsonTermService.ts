@@ -17,7 +17,11 @@ export default class JsonTermService {
 
     public async loadTerms(): Promise<ITerm[] | null> {
         try {
-            const response = await fetch(this._urlTerms);
+            const response = await fetch(this._urlTerms, {
+                headers: {
+                  'Cache-Control': 'no-cache',
+                }
+              });
             const terms = await response.json();
             return terms;
         } catch (e) {
