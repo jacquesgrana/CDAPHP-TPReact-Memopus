@@ -4,11 +4,8 @@ import JsonColumnService from "../services/JsonColumnService";
 import ITerm from "../interfaces/ITerm";
 import JsonTermService from "../services/JsonTermService";
 
-
+// TODO passer terms dans props ?
 const Term = () => {
-
-    
-
     const [terms, setTerms] = useState<ITerm[] | null>(null);
 
 

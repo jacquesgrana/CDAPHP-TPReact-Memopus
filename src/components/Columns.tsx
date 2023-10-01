@@ -4,6 +4,7 @@ import JsonColumnService from "../services/JsonColumnService";
 import JsonCardService from "../services/JsonCardService";
 import ICard from "../interfaces/ICard";
 import JsonTermService from "../services/JsonTermService";
+import Column from "./Column";
 
 const Columns = () => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
@@ -53,8 +54,8 @@ const Columns = () => {
                         const term = loadedTerms.filter(t => t.id === termId)[0];
 
                         // si term pas dans terms
-                        if(column.terms.filter(t => t.id === termId).length === 0) {
-                            // affecter dans cards le term obtenu
+                        if(!column.terms.some(t => t.id === termId)) {
+                            // affecter dans terms le term obtenu
                             column.terms.push(term);
                         }
                             
@@ -88,12 +89,9 @@ const Columns = () => {
         <div className="d-flex gap-3">
           {columns?.map((c: IColumn) => {
             return (
-              <div key={c.id} className="">
-                <button key={c.id} className="btn btn-primary">
-                  {c.label}
-                </button>
-              </div>
+              <Column column={c}></Column>
             );
+            
           })}
         </div>
       </div>
@@ -102,3 +100,10 @@ const Columns = () => {
   
   export default Columns;
   
+  /*
+<div key={c.id} className="">
+                <button key={c.id} className="btn btn-primary">
+                  {c.label}
+                </button>
+              </div>
+  */
