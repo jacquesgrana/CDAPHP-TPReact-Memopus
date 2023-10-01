@@ -7,7 +7,7 @@ const Card = (props: any) => {
         <div key={props.card.id} className="div-card">
             <p className="p-card-question">{props.card.question}</p>
             <div className="d-flex justify-content-center w-100">
-                <button className="btn btn-success">Répondre</button>
+                <button className="btn btn-success btn-card">Répondre</button>
             </div>
         </div>
     );

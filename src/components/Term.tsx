@@ -30,11 +30,11 @@ const Term = (props: any) => {
                     //setTerm(t.name);
                     props.setTerm(t.name);
                     term.current = t.name;
-                }} key={t.id} className={"btn btn-warning "+ (t.name === term.current ? "term-selected" : "")}>{t.name}</button>
+                }} key={t.id} className={"btn btn-warning btn-term "+ (t.name === term.current ? "term-selected" : "")}>{t.name}</button>
             })
             // + t.name ===
         } 
-        <button key={0} className={"btn btn-warning "+ ("TOUS" === term.current ? "term-selected" : "")} onClick={(e) => {
+        <button key={0} className={"btn btn-warning btn-term "+ ("TOUS" === term.current ? "term-selected" : "")} onClick={(e) => {
              //setTerm("TOUS");
              props.setTerm("TOUS");
              term.current = "TOUS";
