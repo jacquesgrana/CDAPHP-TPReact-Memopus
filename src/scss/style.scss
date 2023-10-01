@@ -89,7 +89,7 @@ footer {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
 }
 
 .div-card {
@@ -106,8 +106,20 @@ footer {
 
 .div-btn-column {
     width: 20vw;
+    display: flex;
+    gap: 5px;
 }
 
 .p-card-question {
     color: white;
+}
+
+.btn-column {
+    flex-grow: 1;
+    font-size: small;
+}
+
+.term-selected {
+    //border: 2px solid black;
+    background-color: $warning-light;
 }

@@ -94,7 +94,7 @@ const Columns = (props: any) => {
     useEffect(() => {
       setTerm(props.term);
     }, [props.term]);
-    
+   
     useEffect(() => {
       if (columns !== null) {
         const newFilteredColumns = Library.filterColumnsByTerm(columns, term);
