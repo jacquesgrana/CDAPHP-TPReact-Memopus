@@ -2,23 +2,25 @@ import IColumn from "../interfaces/IColumn";
 import { useEffect, useRef, useState } from "react";
 import JsonColumnService from "../services/JsonColumnService";
 import JsonCardService from "../services/JsonCardService";
-import ICard from "../interfaces/ICard";
 import JsonTermService from "../services/JsonTermService";
 import Column from "./Column";
 import ITerm from "../interfaces/ITerm";
+import Library from "../utils/Library";
 
 const Columns = (props: any) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
     const [terms, setTerms] = useState<ITerm[] | null>(null);
     const [term, setTerm] = useState<string>("TOUS");
-
+    const [filteredColumns, setFilteredColumns] = useState<IColumn[] | null>(null);
     const dataLoaded = useRef(false);
-    
+
+    //const filteredColumns: any = useRef(() => []);
+
     useEffect(() => {
       const columnService = JsonColumnService.getInstance();
       const cardService = JsonCardService.getInstance();
       const termService = JsonTermService.getInstance();
-  
+      setTerm(props.term);
       const loadData = async () => {
         const loadedColumns = await columnService.loadColumns();
         const loadedCards = await cardService.loadCards();
@@ -75,6 +77,8 @@ const Columns = (props: any) => {
           
   
           setColumns(columnsCopy);
+          //filteredColumns.current = [ ...columnsCopy];
+          setFilteredColumns([ ...columnsCopy]);
           dataLoaded.current = true;
           //console.log('terms :', loadedTerms);
           //console.log('cards :', loadedCards);
@@ -85,16 +89,41 @@ const Columns = (props: any) => {
       if (!dataLoaded.current) {
         loadData();
       }
-    }, [dataLoaded]);
-  
+    }, [dataLoaded, term]);
+
+    useEffect(() => {
+      setTerm(props.term);
+    }, [props.term]);
+    
+    useEffect(() => {
+      if (columns !== null) {
+        const newFilteredColumns = Library.filterColumnsByTerm(columns, term);
+        setFilteredColumns(newFilteredColumns);
+      }
+    }, [term, columns]);
+    
+
+/*
+    useEffect(() => {
+      setTerm(props.term);
+      if(columns !== null) {
+        const newFilteredColumns = Library.filterColumnsByTerm(columns, term);
+        setFilteredColumns(newFilteredColumns);
+        console.log('filteredColumns changed to:', newFilteredColumns);
+      }
+    }, [props.term, columns]);*/
+    
+    useEffect(() => {}, [filteredColumns]);
+
+    
     //console.log('columns :', columns);
     
     return (
       <div className="">
         <h4 className="text-center my-3">Colonnes</h4>
-        <h5 className="text-center my-2">Filtre : {props.term}</h5>
+        <h5 className="text-center my-2">Filtre : {term}</h5>
         <div className="d-flex gap-3">
-          {columns?.map((c: IColumn) => {
+          {filteredColumns?.map((c: IColumn) => {
             return (
               <Column key={c.id} column={c} terms={terms}></Column>
             );

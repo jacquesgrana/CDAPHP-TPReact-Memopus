@@ -5,7 +5,6 @@ import JsonTermService from "../services/JsonTermService";
 // TODO passer terms dans props ?
 const Term = (props: any) => {
     const [terms, setTerms] = useState<ITerm[] | null>(null);
-    const [term, setTerm] = useState<string>("TOUS");
 
     useEffect(() => { 
         const termService = JsonTermService.getInstance();
@@ -27,14 +26,13 @@ const Term = (props: any) => {
             { 
             terms?.map((t: ITerm) => {
                 return <button onClick={(e) =>  {
-                    setTerm(t.name);
+                    //setTerm(t.name);
                     props.setTerm(t.name);
                 }} key={t.id} className="btn btn-warning">{t.name}</button>
             })
-            
         }
         <button key={0} className="btn btn-warning" onClick={(e) => {
-             setTerm("TOUS");
+             //setTerm("TOUS");
              props.setTerm("TOUS");
         }}>TOUS</button>
         </div>
