@@ -53,13 +53,27 @@ const Header = (props: any) => {
 
   return (
     <header className="d-flex flex-column p-2">
-      <h1 className="text-center mt-2">Header</h1>
+      <h1 className="text-center mt-2">MemoPus</h1>
       <div className="d-flex gap-3 justify-content-center">
-      <p className="text-center">{isLogged ? "Utilisateur connecté : " + securityService.username : "Utilisateur non connecté"}</p>
-      {isLogged ? <button className="btn btn-warning btn-sm" id="btn-disconnect" onClick={handleLogout}>Déconnecter</button> : ""}
+      <p className="text-center">
+        {isLogged ? (
+          <>
+            {"Utilisateur connecté : "}
+            <span className="text-warning">{securityService.username}</span>
+          </>
+        ) : (
+          "Utilisateur non connecté"
+        )}
+      </p>
+      {isLogged ? (
+        <button className="btn btn-warning btn-sm" id="btn-disconnect" onClick={handleLogout}>
+          Déconnecter
+        </button>
+      ) : null}
       </div>
     </header>
   );
+  
 };
 
 export default Header;

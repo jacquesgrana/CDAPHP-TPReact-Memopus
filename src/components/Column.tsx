@@ -8,7 +8,7 @@ const Column = (props: any) => {
     return (
         <div className="div-column">
           <div className="div-btn-column">
-          <div key={props.column.id} className="btn btn-warning btn-column">
+          <div key={props.column.id} className="btn-column">
             {props.column.label}
           </div>
           <button className="btn btn-success">+</button>

@@ -8,6 +8,11 @@
     border: 1px solid $success;
 }
 
+.btn-success:active {
+    background-color: $success-light !important;
+    border: 1px solid $success;
+}
+
 .btn-primary {
     background-color: $primary;
     border: 1px solid $primary;
@@ -18,6 +23,11 @@
     border: 1px solid $primary;
 }
 
+.btn-primary:active {
+    background-color: $primary-light !important;
+    border: 1px solid $primary;
+}
+
 .btn-warning {
     background-color: $warning;
     border: 1px solid $warning;
@@ -25,5 +35,10 @@
 
 .btn-warning:hover {
     background-color: $warning-light;
+    border: 1px solid $warning;
+}
+
+.btn-warning:active {
+    background-color: $warning-light !important;
     border: 1px solid $warning;
 }
