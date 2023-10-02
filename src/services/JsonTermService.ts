@@ -12,8 +12,12 @@ export default class JsonTermService {
     private constructor() {}
 
     public static getInstance(): JsonTermService {
-        return this._instance === null ? new JsonTermService() : this._instance;
-    }
+        if (this._instance === null) {
+          this._instance = new JsonTermService();
+        }
+        return this._instance;
+      }
+    
 
     public async loadTerms(): Promise<ITerm[] | null> {
         try {

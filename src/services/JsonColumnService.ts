@@ -12,8 +12,11 @@ export default class JsonColumnService {
     private constructor() {}
 
     public static getInstance(): JsonColumnService {
-        return this._instance === null ? new JsonColumnService() : this._instance;
-    }
+        if (this._instance === null) {
+          this._instance = new JsonColumnService();
+        }
+        return this._instance;
+      }
 
     public async loadColumns(): Promise<IColumn[] | null> {
         try {

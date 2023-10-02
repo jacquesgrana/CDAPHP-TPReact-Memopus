@@ -12,8 +12,12 @@ export default class JsonCardService {
     private constructor() {}
 
     public static getInstance(): JsonCardService {
-        return this._instance === null ? new JsonCardService() : this._instance;
-    }
+        if (this._instance === null) {
+          this._instance = new JsonCardService();
+        }
+        return this._instance;
+      }
+
 
     public async loadCards(): Promise<ICard[] | null> {
         try {

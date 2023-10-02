@@ -1,7 +1,5 @@
 import { ActionFunctionArgs } from "react-router-dom";
 import SecurityService from "../services/SecurityService";
-//import JsonServer from "../services/JsonServer";
-import { useNavigate } from 'react-router-dom';
 import { redirect } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,6 +18,10 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
     
     if (isConnected) {
         security.username = username;
+        security.isLogged = true; //
+        //console.log('avant appel notify');
+        security.notifyListeners(); //
+        //console.log('notify envoyé');
         // TODO ajouter requete pour set les datas de l'user (id par  l'username)
         const users = await JsonUserService.getInstance().loadByUsername(username) as IUser[];
         //console.log('action/security : users :', users);
@@ -29,6 +31,8 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
         toast.success('Connexion réussie');
         return redirect("/home");
     } else {
+        security.isLogged = false; //
+        security.notifyListeners(); //
         toast.error('Erreur de connexion');
         return redirect("/connect");
     }

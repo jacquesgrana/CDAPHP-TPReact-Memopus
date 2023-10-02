@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SecurityService from '../services/SecurityService';
 import { ToastContainer } from 'react-toastify';
@@ -8,34 +8,32 @@ import Footer from './Footer';
 function App() {
   const navigate = useNavigate();
   const security = SecurityService.getInstance();
+  const [isLogged, setIsLogged] = useState<boolean>(security.isLogged);
   // TODO useState ou autre pour islogged ?
 
+  // ne sert a rien ?
+  
   useEffect(() => {
     if (security.isLogged === false) {
       navigate('/connect', { replace: true });
+      setIsLogged(false);
     }
-  }, []);
+    else {
+      setIsLogged(true);
+      //console.log('app.tsx : isLogged :', isLogged);
+    }
+  }, [security.isLogged]);
 
   return (
     <div className="App container" id="container_all">
       <ToastContainer />
-      <Header></Header>
+      <Header isLogged={isLogged}></Header>
       <main>
         <Outlet />
       </main>
       <Footer></Footer>
-      
     </div>
   );
 }
 
 export default App;
-/*
-      <header>
-        <h1 className='text-center'>Header</h1>
-      </header>
-
-      <footer>
-        <h2 className='text-center'>Footer</h2>
-      </footer>
-*/

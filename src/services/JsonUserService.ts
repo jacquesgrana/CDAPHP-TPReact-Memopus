@@ -12,8 +12,12 @@ export default class JsonUserService {
     private constructor() {}
 
     public static getInstance(): JsonUserService {
-        return this._instance === null ? new JsonUserService() : this._instance;
-    }
+        if (this._instance === null) {
+          this._instance = new JsonUserService();
+        }
+        return this._instance;
+      }
+    
 
     public async loadUsers(): Promise<IUser[] | void> {
         return fetch(this._urlUsers)
