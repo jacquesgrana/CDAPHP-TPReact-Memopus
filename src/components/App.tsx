@@ -4,6 +4,7 @@ import SecurityService from '../services/SecurityService';
 import { ToastContainer } from 'react-toastify';
 import Header from './Header';
 import Footer from './Footer';
+import Modal from 'react-modal';
 
 function App() {
   const navigate = useNavigate();
@@ -11,8 +12,8 @@ function App() {
   const [isLogged, setIsLogged] = useState<boolean>(security.isLogged);
   // TODO useState ou autre pour islogged ?
 
+  Modal.setAppElement('#root');
   // ne sert a rien ?
-  
   useEffect(() => {
     if (security.isLogged === false) {
       navigate('/connect', { replace: true });

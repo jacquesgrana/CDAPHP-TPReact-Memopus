@@ -137,3 +137,40 @@ footer {
     //border: 2px solid black;
     background-color: $warning-light;
 }
+
+.modal-term {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form-term {
+   width:auto;
+   height:auto;
+   background-color: $success-light;
+   padding: 15px;
+   border-radius: 15px;
+}
+
+.div-form-input-term {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 600px;
+    justify-content: flex-end;
+    align-items: center; 
+}
+
+.div-form-input-label-term {
+    width: 200px;
+    color: white;
+    text-align: end;
+}
+
+.div-form-input-input-term {
+    color: $success;
+    border: 1px solid $success;
+}

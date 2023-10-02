@@ -19,12 +19,8 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
     if (isConnected) {
         security.username = username;
         security.isLogged = true; //
-        //console.log('avant appel notify');
         security.notifyListeners(); //
-        //console.log('notify envoyé');
-        // TODO ajouter requete pour set les datas de l'user (id par  l'username)
         const users = await JsonUserService.getInstance().loadByUsername(username) as IUser[];
-        //console.log('action/security : users :', users);
         if(users.length > 0) {
             security.id = users[0].id;
         }
@@ -33,7 +29,7 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
     } else {
         security.isLogged = false; //
         security.notifyListeners(); //
-        toast.error('Erreur de connexion');
+        toast.error('Utilisateur non reconnu');
         return redirect("/connect");
     }
     //return { redirect: isConnected ? '/home' : '/connect' };

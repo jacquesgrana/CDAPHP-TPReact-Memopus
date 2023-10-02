@@ -18,6 +18,10 @@ export default class SecurityService {
     return this._instance === null ? new SecurityService() : this._instance;
   }*/
 
+  /**
+   * Design pattern singleton
+   * @returns SecurityService
+   */
   public static getInstance(): SecurityService {
     if (this._instance === null) {
       this._instance = new SecurityService();
@@ -25,12 +29,14 @@ export default class SecurityService {
     return this._instance;
   }
 
+  /**
+   * Design pattern observer pour répercuter isLogged
+   */
   public notifyListeners() {
     //console.log('notify :');
     //console.log('listeners :', this.listeners)
     this.listeners.forEach((listener) => {
       listener(this._isLogged);
-      
     });
   }
 
@@ -88,7 +94,7 @@ export default class SecurityService {
     // si filter renvoie rien --> ko
     // set isLogged a la fin
   }
-  
+
   public async disconnect(callback: () => void) {
     this._isLogged = false;
     this.notifyListeners();

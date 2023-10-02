@@ -1,6 +1,6 @@
 import Columns from "./Columns";
 import { useState } from "react";
-import Term from "./Term";
+import Term from "./Terms";
 
 
 const Home = () => {
