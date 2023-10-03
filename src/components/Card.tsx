@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const Card = (props: any) => {
   const [isModalQuestionOpen, setIsModalQuestionOpen] = useState(false);
+  const [answer, setAnswer] = useState("");
   const answerRef = useRef<HTMLInputElement>(null);
 
   function openModalCard() {
@@ -84,6 +85,8 @@ const Card = (props: any) => {
               type="text"
               name="answer"
               id="answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
             />
           </div>
           <div className="d-flex justify-content-center gap-3 mt-3 mb-1">
@@ -91,8 +94,9 @@ const Card = (props: any) => {
               className="btn btn-success btn-sm"
               type="button"
               onClick={evaluateAnswer}
+              disabled={!answer}
             >
-              Valider
+              valider
             </button>
             <button className="btn btn-warning btn-sm" onClick={closeModalCard}>
               Annuler

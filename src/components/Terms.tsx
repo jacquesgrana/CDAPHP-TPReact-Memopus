@@ -9,6 +9,7 @@ import LoadTermObservable from "../observables/LoadTermObservable";
 const Term = (props: any) => {
   const [terms, setTerms] = useState<ITerm[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState("");
   const term = useRef("TOUS");
   const fetcher = useFetcher();
   const termService = JsonTermService.getInstance();
@@ -29,7 +30,6 @@ const Term = (props: any) => {
 
   useEffect(() => {}, [terms]);
 
-
   function openModalTerm() {
     setIsModalOpen(true);
   }
@@ -39,13 +39,12 @@ const Term = (props: any) => {
   }
 
   const loadTerms = async (reload: boolean) => {
-    if(reload) {
+    if (reload) {
       const loadedColumns = await termService.loadTerms();
       setTerms(loadedColumns);
       //console.log("terms reload");
       //termObservable.reloadTerms = false;
     }
-    
   };
 
   //const columns: any = useLoaderData();
@@ -119,12 +118,18 @@ const Term = (props: any) => {
               type="text"
               name="name"
               id="name"
-              placeholder="Saisir le nom du terme"
+              placeholder="saisir le nom du terme"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="d-flex justify-content-center gap-3 mt-3 mb-1">
-            <button className="btn btn-success btn-sm" type="submit">
-              Valider
+            <button
+              className="btn btn-success btn-sm"
+              type="submit"
+              disabled={!name}
+            >
+              valider
             </button>
             <button className="btn btn-warning btn-sm" onClick={closeModalTerm}>
               Annuler

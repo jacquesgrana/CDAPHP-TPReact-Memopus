@@ -3,6 +3,8 @@ import { useFetcher } from "react-router-dom";
 
 const Connect = () => {
   const [isPwdVisible, setIsPwdVisible] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [pwd, setPwd] = useState("");
 
   const fetcher = useFetcher();
 
@@ -23,7 +25,9 @@ const Connect = () => {
             type="text"
             name="username"
             id="username"
-            placeholder="Saisir votre nom d'utilisateur"
+            placeholder="saisir votre nom d'utilisateur"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="div-form-input form-group">
@@ -35,7 +39,9 @@ const Connect = () => {
             type={!isPwdVisible ? "password" : "text"}
             name="pwd"
             id="pwd"
-            placeholder="Saisir votre mot de passe"
+            placeholder="saisir votre mot de passe"
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
           />
           <button
             type="button"
@@ -49,7 +55,8 @@ const Connect = () => {
           <input
             className="btn btn-success"
             type="submit"
-            value="Se Connecter"
+            value="se connecter"
+            disabled={!username || !pwd}
           />
         </div>
       </fetcher.Form>

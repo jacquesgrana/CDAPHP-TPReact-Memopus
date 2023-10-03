@@ -7,6 +7,8 @@ import ITerm from "../interfaces/ITerm";
 
 const Column = (props: any) => {
   const [isModalCardOpen, setIsModalCardOpen] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const fetcher = useFetcher();
 
   // TODO utiliser un useState et un useEffect pour column ?
@@ -63,7 +65,9 @@ const Column = (props: any) => {
               type="text"
               name="question"
               id="question"
-              placeholder="Saisir la question"
+              placeholder="saisir la question"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
             />
           </div>
           <div className="div-form-input-term form-group">
@@ -75,11 +79,16 @@ const Column = (props: any) => {
               type="text"
               name="answer"
               id="answer"
-              placeholder="Saisir la réponse"
+              placeholder="saisir la réponse"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
             />
           </div>
           <div className="div-form-input-term form-group">
-            <label className="div-form-input-label-term" htmlFor="columnDisplay">
+            <label
+              className="div-form-input-label-term"
+              htmlFor="columnDisplay"
+            >
               Colonne :
             </label>
             <input
@@ -117,9 +126,14 @@ const Column = (props: any) => {
             </select>
           </div>
           <div className="d-flex justify-content-center gap-3 mt-3 mb-1">
-            <button className="btn btn-success btn-sm" type="submit">
-              Valider
+            <button
+              className="btn btn-success btn-sm"
+              type="submit"
+              disabled={!question || !answer}
+            >
+              valider
             </button>
+
             <button className="btn btn-warning btn-sm" onClick={closeModalCard}>
               Annuler
             </button>
