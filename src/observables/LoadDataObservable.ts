@@ -1,7 +1,7 @@
-export default class LoadTermObservable {
-    private _reloadTerms: boolean = false;
+export default class LoadDataObservable {
+    private _reloadDatas: boolean = false;
     
-    private static _instance: LoadTermObservable | null = null;
+    private static _instance: LoadDataObservable | null = null;
 
     private listeners: Function[] = [];
 
@@ -11,27 +11,24 @@ export default class LoadTermObservable {
    * Design pattern singleton
    * @returns LoadTermObservable
    */
-  public static getInstance(): LoadTermObservable {
+  public static getInstance(): LoadDataObservable {
     if (this._instance === null) {
-      this._instance = new LoadTermObservable();
+      this._instance = new LoadDataObservable();
     }
     return this._instance;
   }
 
   /**
-   * Design pattern observer pour répercuter _reloadTerms
+   * Design pattern observer pour répercuter _reloadDatas
    */
   public notifyListeners() {
-    //console.log('notify :');
-    //console.log('listeners :', this.listeners)
     this.listeners.forEach((listener) => {
-      listener(this._reloadTerms);
+      listener(this._reloadDatas);
     });
-    this._reloadTerms = false;
+    this._reloadDatas = false;
   }
 
   public addListener(listener: Function): void {
-    //console.log('add listener')
     this.listeners.push(listener);
   }
 
@@ -43,10 +40,10 @@ export default class LoadTermObservable {
   }
 
   public get reloadTerms() {
-    return this._reloadTerms;
+    return this._reloadDatas;
   }
 
   public set reloadTerms(value : boolean) {
-    this._reloadTerms = value;
+    this._reloadDatas = value;
   }
 }

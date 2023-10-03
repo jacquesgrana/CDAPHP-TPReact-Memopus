@@ -20,17 +20,8 @@ const Columns = (props: any) => {
     const termService = JsonTermService.getInstance();
     const termObservable = LoadTermObservable.getInstance();
 
-    //const filteredColumns: any = useRef(() => []);
-
     useEffect(() => {
-      
-
       setTerm(props.term);
-
-      /*
-      const loadData = async () => {
-        loadDatasFctn();
-      };*/
   
       if (!dataLoaded.current) {
         loadDatasFctn();
@@ -58,6 +49,10 @@ const Columns = (props: any) => {
       }
     }, [term, columns]);
 
+    useEffect(() => {}, [filteredColumns]);
+
+    useEffect(() => {}, [terms]);
+
     const handleLoadTerms = (loadTerms: boolean) => {
       if(loadTerms) {
         loadDatasFctn();
@@ -71,7 +66,7 @@ const Columns = (props: any) => {
 
       if (loadedColumns !== null && loadedCards !== null) {
         const addedIdCards: Set<number> = new Set();
-        const columnsCopy = [...loadedColumns];
+        const columnsCopy = [ ...loadedColumns];
 
         loadedCards.forEach(card => {
           columnsCopy.forEach(column => {
@@ -128,24 +123,6 @@ const Columns = (props: any) => {
         //console.log('columns :', columnsCopy);
       }
     }
-    
-
-/*
-    useEffect(() => {
-      setTerm(props.term);
-      if(columns !== null) {
-        const newFilteredColumns = Library.filterColumnsByTerm(columns, term);
-        setFilteredColumns(newFilteredColumns);
-        console.log('filteredColumns changed to:', newFilteredColumns);
-      }
-    }, [props.term, columns]);*/
-    
-    useEffect(() => {}, [filteredColumns]);
-
-    useEffect(() => {}, [terms]);
-    
-    //console.log('columns :', columns);
-    
     return (
       <div className="">
         <h4 className="text-center my-3">Colonnes</h4>
@@ -163,11 +140,3 @@ const Columns = (props: any) => {
   };
   
   export default Columns;
-  
-  /*
-<div key={c.id} className="">
-                <button key={c.id} className="btn btn-primary">
-                  {c.label}
-                </button>
-              </div>
-  */

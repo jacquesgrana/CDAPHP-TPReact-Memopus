@@ -43,7 +43,7 @@ const Term = (props: any) => {
       const loadedColumns = await termService.loadTerms();
       setTerms(loadedColumns);
       //console.log("terms reload");
-      termObservable.reloadTerms = false;
+      //termObservable.reloadTerms = false;
     }
     
   };

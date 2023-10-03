@@ -149,6 +149,7 @@ footer {
     background-color: $warning-light;
 }
 
+.modal-card,
 .modal-term {
     display: flex;
     flex-direction: column;
@@ -158,13 +159,19 @@ footer {
     height: 100vh;
 }
 
+.form-card,
 .form-term {
    width:auto;
    height:auto;
    background-color: $success-light;
    padding: 15px;
    border-radius: 5px;
-   color: white;;
+   color: white;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .modal-term-overlay {
