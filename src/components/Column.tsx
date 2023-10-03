@@ -127,14 +127,14 @@ const Column = (props: any) => {
           </div>
           <div className="d-flex justify-content-center gap-3 mt-3 mb-1">
             <button
-              className="btn btn-success btn-sm"
+              className="btn btn-success btn-sm btn-modal"
               type="submit"
               disabled={!question || !answer}
             >
               valider
             </button>
 
-            <button className="btn btn-warning btn-sm" onClick={closeModalCard}>
+            <button className="btn btn-warning btn-sm btn-modal" onClick={closeModalCard}>
               Annuler
             </button>
           </div>

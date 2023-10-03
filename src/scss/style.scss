@@ -130,6 +130,7 @@ footer {
 .btn-column {
     flex-grow: 1;
     font-size: small;
+    font-weight: bold;
     background-color: $warning;
     border-radius: 5px;
     display: flex;
@@ -139,10 +140,16 @@ footer {
 
 .btn-term {
     min-width: 120px;
+    font-size: medium;
+    font-weight: bold;
 }
 
 .btn-card{
     margin-bottom: 15px;
+}
+
+.btn-modal {
+    min-width: 120px;
 }
 
 .term-selected {

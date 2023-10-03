@@ -128,10 +128,10 @@ const Columns = (props: any) => {
       }
     }
     return (
-      <div className="">
-        <h4 className="text-center my-3">Colonnes</h4>
-        <h5 className="text-center my-2">Filtre : {term}</h5>
-        <div className="d-flex gap-3">
+      <div className="d-flex flex-column flex-wrap justify-content-center">
+        <h4 className="text-center mt-4">Colonnes</h4>
+        <h5 className="text-center mt-2 mb-4">Filtre : {term}</h5>
+        <div className="d-flex justify-content-center gap-3 flex-wrap">
           {filteredColumns?.map((c: IColumn) => {
             return (
               <Column key={c.id} column={c} terms={terms}></Column>

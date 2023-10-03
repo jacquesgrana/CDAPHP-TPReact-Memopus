@@ -4,6 +4,15 @@ import JsonCardService from "../services/JsonCardService";
 import ICard from "../interfaces/ICard";
 import LoadDataObservable from "../observables/LoadDataObservable";
 
+/**
+ * Fonction 'action', déclenchée par la route '/addCard'
+ * qui récupère les données du formulaire, construit l'objet à insérer
+ * et demande la requête d'insertion.
+ * Avec, après, demande de notification par l'observable LoadDataObservable
+ * aux observers pour la mise à jour de l'affichage.
+ * @param param0 
+ * @returns 
+ */
 export const actionAddCard = async({request}: ActionFunctionArgs) => {
     const cardService = JsonCardService.getInstance();
     const dataObservable = LoadDataObservable.getInstance();

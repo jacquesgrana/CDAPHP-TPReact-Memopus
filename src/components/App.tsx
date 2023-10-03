@@ -6,11 +6,16 @@ import Header from './Header';
 import Footer from './Footer';
 import Modal from 'react-modal';
 
+
+/**
+ * Composant principal qui définit le html de la page.
+ * Contien le Outlet du routeur.
+ * @returns Composant principal.
+ */
 function App() {
   const navigate = useNavigate();
   const security = SecurityService.getInstance();
   const [isLogged, setIsLogged] = useState<boolean>(security.isLogged);
-  // TODO useState ou autre pour islogged ?
 
   Modal.setAppElement('#root');
   // ne sert a rien ?
@@ -21,7 +26,6 @@ function App() {
     }
     else {
       setIsLogged(true);
-      //console.log('app.tsx : isLogged :', isLogged);
     }
   }, [security.isLogged]);
 

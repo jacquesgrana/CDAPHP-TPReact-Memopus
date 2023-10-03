@@ -6,7 +6,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import JsonUserService from "../services/JsonUserService";
 import IUser from "../interfaces/IUser";
 
-
+/**
+ * Fonction 'action', déclenchée par la route '/login'
+ * qui récupère les données du formulaire et fait la demande
+ * de connexion.
+ * Avec, après, demande de notification par l'observable 
+ * SecurityService aux observers pour la mise à jour de 
+ * l'affichage du header.
+ * Et redirection vers la homepage en cas de succès
+ * et vers la page de login sinon.
+ * @param param0 
+ * @returns 
+ */
 export const actionLogin = async({request}: ActionFunctionArgs) => {
     const formData = await request.formData();
     const username = formData.get("username") as string;
@@ -15,7 +26,6 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
     const security = SecurityService.getInstance();
     const isConnected = await security.connect(username, pwd);
 
-    
     if (isConnected) {
         security.username = username;
         security.isLogged = true; //

@@ -52,7 +52,7 @@ const Term = (props: any) => {
   return (
     <div className="">
       <h4 className="text-center my-3">Termes</h4>
-      <div className="d-flex gap-2">
+      <div className="d-flex gap-2 flex-wrap justify-content-center">
         {
           terms?.map((t: ITerm) => {
             return (
@@ -125,13 +125,13 @@ const Term = (props: any) => {
           </div>
           <div className="d-flex justify-content-center gap-3 mt-3 mb-1">
             <button
-              className="btn btn-success btn-sm"
+              className="btn btn-success btn-sm btn-modal"
               type="submit"
               disabled={!name}
             >
               valider
             </button>
-            <button className="btn btn-warning btn-sm" onClick={closeModalTerm}>
+            <button className="btn btn-warning btn-sm btn-modal" onClick={closeModalTerm}>
               Annuler
             </button>
           </div>
