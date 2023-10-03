@@ -97,7 +97,7 @@ const Column = (props: any) => {
               name="columnDisplay"
               id="columnDisplay"
               disabled
-              value={props.column.id}
+              value={props.column.label}
             />
             <input
               type="hidden"

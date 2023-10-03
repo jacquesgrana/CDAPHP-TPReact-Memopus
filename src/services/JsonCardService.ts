@@ -54,4 +54,24 @@ export default class JsonCardService {
         return null;
       }
     }
+
+    public async patchCardColumn(id: number, column: number) {
+      try {
+        //card.column = Number(card.column);
+        //card.tid = Number(card.tid);
+        const response = await fetch(`${this._urlCards}/${id}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({column: column}),
+          method: "PATCH"
+        }).then(function (res) {
+          //console.log('res requete', res);
+        });
+      } catch (e) {
+        console.error(e);
+        return null;
+      }
+    }
 }

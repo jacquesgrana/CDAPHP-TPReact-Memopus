@@ -1,19 +1,44 @@
 import { useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { toast } from "react-toastify";
+import LoadDataObservable from "../observables/LoadDataObservable";
+import JsonCardService from "../services/JsonCardService";
 
 const Card = (props: any) => {
   const [isModalQuestionOpen, setIsModalQuestionOpen] = useState(false);
   const [answer, setAnswer] = useState("");
   const answerRef = useRef<HTMLInputElement>(null);
+  const dataObservable = LoadDataObservable.getInstance();
+  const cardService = JsonCardService.getInstance();
 
   function openModalCard() {
     setIsModalQuestionOpen(true);
-    //console.log('clic');
   }
 
   function closeModalCard() {
     setIsModalQuestionOpen(false);
+  }
+
+  async function goToLeft() {
+    // récupérer l'id de la card
+    const id = props.card.id;
+    // calculer la nouvelle valeur de column
+    const column = props.card.column - 1;
+    // faire requete de patch sur column
+    await cardService.patchCardColumn(id, column);
+    // dataObservable.loadData = true;
+    // appel fonction notify
+    dataObservable.reloadDatas = true; //
+    dataObservable.notifyListeners(); //
+    // navigate ? --> non
+  }
+
+  async function goToRight() {
+    const id = props.card.id;
+    const column = props.card.column + 1;
+    await cardService.patchCardColumn(id, column);
+    dataObservable.reloadDatas = true; //
+    dataObservable.notifyListeners(); //
   }
 
   // TODO améliorer
@@ -38,7 +63,7 @@ const Card = (props: any) => {
         <p className="p-card-question">{props.card.question}</p>
         <div className="d-flex justify-content-center gap-1 w-100">
           {props.card.column !== 1 ? (
-            <button className="btn btn-success btn-card btn-sm">←</button>
+            <button className="btn btn-success btn-card btn-sm" onClick={goToLeft}>←</button>
           ) : (
             ""
           )}
@@ -47,7 +72,7 @@ const Card = (props: any) => {
             Répondre
           </button>
           {props.card.column !== 4 ? (
-            <button className="btn btn-success btn-card btn-sm">→</button>
+            <button className="btn btn-success btn-card btn-sm" onClick={goToRight}>→</button>
           ) : (
             ""
           )}

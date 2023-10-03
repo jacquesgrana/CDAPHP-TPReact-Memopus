@@ -61,3 +61,25 @@
     background-color: $warning-pastel !important;
     border: 1px solid $warning;
 }
+
+
+
+.btn-danger {
+    background-color: $danger;
+    border: 1px solid $danger;
+}
+
+.btn-danger:hover {
+    background-color: $danger-light;
+    border: 1px solid $danger;
+}
+
+.btn-danger:active {
+    background-color: $danger-ultra-light !important;
+    border: 1px solid $danger;
+}
+
+.btn-danger:disabled {
+    background-color: $danger-pastel !important;
+    border: 1px solid $danger;
+}
