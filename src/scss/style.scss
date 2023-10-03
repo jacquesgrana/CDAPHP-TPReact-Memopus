@@ -113,6 +113,7 @@ footer {
     align-items: flex-start;
     background-color: $success-light;
     padding: 15px;
+    padding-bottom: 0px;
     border-radius: 5px;
     min-height: 120px;
 }
@@ -146,10 +147,17 @@ footer {
 
 .btn-card{
     margin-bottom: 15px;
+    font-size: small;
 }
 
 .btn-modal {
     min-width: 120px;
+}
+
+.btn-card-sm {
+    font-size: small;
+    width: 25px;
+    height: 25px;
 }
 
 .term-selected {

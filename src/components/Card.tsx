@@ -13,6 +13,7 @@ import JsonCardService from "../services/JsonCardService";
 const Card = (props: any) => {
   const [isModalQuestionOpen, setIsModalQuestionOpen] = useState(false);
   const [answer, setAnswer] = useState("");
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const answerRef = useRef<HTMLInputElement>(null);
   const dataObservable = LoadDataObservable.getInstance();
   const cardService = JsonCardService.getInstance();
@@ -24,6 +25,28 @@ const Card = (props: any) => {
   function closeModalCard() {
     setIsModalQuestionOpen(false);
   }
+  
+  const deleteCard = () => {
+    setIsDeleteConfirmationOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    const id = props.card.id;
+
+    try {
+      await cardService.deleteCard(id);
+      toast.success('Carte supprimée avec succès');
+      setIsDeleteConfirmationOpen(false);
+      dataObservable.reloadDatas = true; //
+      dataObservable.notifyListeners(); //
+    } catch (error) {
+      toast.error('Erreur lors de la suppression de la carte');
+    }
+  };
+
+  const cancelDelete = () => {
+    setIsDeleteConfirmationOpen(false);
+  };
 
   async function goToLeft() {
     // récupérer l'id de la card
@@ -66,8 +89,11 @@ const Card = (props: any) => {
   return (
     <>
       <div key={props.card.id} className="div-card">
+        <div className="d-flex justify-content-center w-100 mb-0">
         <p className="p-card-question">{props.card.question}</p>
-        <div className="d-flex justify-content-center gap-1 w-100">
+        <button className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-2" onClick={deleteCard}>X</button>
+        </div>
+        <div className="d-flex justify-content-center gap-2 w-100">
           {props.card.column !== 1 ? (
             <button className="btn btn-success btn-card btn-sm" onClick={goToLeft}>←</button>
           ) : (
@@ -132,6 +158,21 @@ const Card = (props: any) => {
             <button className="btn btn-warning btn-sm btn-modal" onClick={closeModalCard}>
               Annuler
             </button>
+          </div>
+        </div>
+      </ReactModal>
+      <ReactModal
+        isOpen={isDeleteConfirmationOpen}
+        onRequestClose={cancelDelete}
+        contentLabel="Confirmation de suppression"
+        className="modal-card"
+        
+      >
+        <div className="form-card">
+          <p className="text-center mt-1 mb-3">Voulez-vous vraiment supprimer cette carte ?</p>
+          <div className="d-flex w-100 gap-2 justify-content-center">
+          <button className="btn btn-success btn-sm btn-modal" onClick={confirmDelete}>Valider</button>
+          <button className="btn btn-warning btn-sm btn-modal" onClick={cancelDelete}>Annuler</button>
           </div>
         </div>
       </ReactModal>
