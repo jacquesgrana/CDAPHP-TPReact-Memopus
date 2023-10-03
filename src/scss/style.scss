@@ -86,6 +86,7 @@ footer {
     flex-grow: 1;
 }
 
+.div-form-input-input-term:focus,
 .div-form-input-input:focus {
     color: $success;
     border: 1px solid $success;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData, useFetcher } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 
 const Connect = () => {
   const [isPwdVisible, setIsPwdVisible] = useState<boolean>(false);

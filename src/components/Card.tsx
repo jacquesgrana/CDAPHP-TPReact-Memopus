@@ -1,4 +1,3 @@
-import ICard from "../interfaces/ICard";
 
 const Card = (props: any) => {
     // TODO faire interface pour typer les props

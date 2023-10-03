@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import IUser from "../interfaces/IUser";
 import JsonUserService from "./JsonUserService";
-import { redirect } from "react-router-dom";
 
 export default class SecurityService {
   private _isLogged: boolean = false;

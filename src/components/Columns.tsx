@@ -89,7 +89,7 @@ const Columns = (props: any) => {
       if (!dataLoaded.current) {
         loadData();
       }
-    }, [dataLoaded, term]);
+    }, [dataLoaded, term, props.term]);
 
     useEffect(() => {
       setTerm(props.term);

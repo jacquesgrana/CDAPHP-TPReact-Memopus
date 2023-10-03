@@ -1,36 +1,53 @@
 import ITerm from "../interfaces/ITerm";
 
 export default class JsonTermService {
-    private _url: string = "http://localhost:3001/";
-    //private _urlUsers: string = this._url + "users";
-    //private _urlColumns: string = this._url + "colums";
-    private _urlTerms: string = this._url + "terms";
-    //private _urlCards: string = this._url + "cards";
+  private _url: string = "http://localhost:3001/";
+  //private _urlUsers: string = this._url + "users";
+  //private _urlColumns: string = this._url + "colums";
+  private _urlTerms: string = this._url + "terms";
+  //private _urlCards: string = this._url + "cards";
 
-    private static _instance: JsonTermService | null = null;
+  private static _instance: JsonTermService | null = null;
 
-    private constructor() {}
+  private constructor() {}
 
-    public static getInstance(): JsonTermService {
-        if (this._instance === null) {
-          this._instance = new JsonTermService();
-        }
-        return this._instance;
-      }
-    
-
-    public async loadTerms(): Promise<ITerm[] | null> {
-        try {
-            const response = await fetch(this._urlTerms, {
-                headers: {
-                  'Cache-Control': 'no-cache',
-                }
-              });
-            const terms = await response.json();
-            return terms;
-        } catch (e) {
-            console.error(e);
-            return null;
-        }
+  public static getInstance(): JsonTermService {
+    if (this._instance === null) {
+      this._instance = new JsonTermService();
     }
+    return this._instance;
+  }
+
+  public async loadTerms(): Promise<ITerm[] | null> {
+    try {
+      const response = await fetch(this._urlTerms, {
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
+      const terms = await response.json();
+      return terms;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
+
+  public async addTerm(term: ITerm) {
+    try {
+      const response = await fetch(this._urlTerms, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(term),
+        method: "POST"
+      }).then(function (res) {
+        //console.log('res requete', res);
+      });
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
 }

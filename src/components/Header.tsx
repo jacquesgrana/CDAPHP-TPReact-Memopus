@@ -43,7 +43,7 @@ const Header = (props: any) => {
     return () => {
       securityService.removeListener(updateIsLogged);
     };
-  }, []);
+  }, [securityService]);
 
   const handleLogout = () => {
     securityService.disconnect(() => {
@@ -53,7 +53,7 @@ const Header = (props: any) => {
 
   return (
     <header className="d-flex flex-column p-2">
-      <h1 className="text-center mt-2">MemoPus</h1>
+      <h1 className="text-center mt-2"><span className="text-warning">Memo</span>Pus</h1>
       <div className="d-flex gap-3 justify-content-center">
       <p className="text-center">
         {isLogged ? (
