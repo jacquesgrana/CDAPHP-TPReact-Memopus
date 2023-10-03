@@ -39,11 +39,11 @@ export default class LoadDataObservable {
     }
   }
 
-  public get reloadTerms() {
+  public get reloadDatas() {
     return this._reloadDatas;
   }
 
-  public set reloadTerms(value : boolean) {
+  public set reloadDatas(value : boolean) {
     this._reloadDatas = value;
   }
 }

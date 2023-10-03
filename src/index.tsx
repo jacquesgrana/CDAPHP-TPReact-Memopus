@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Connect from './components/Connect';
 import { actionLogin } from './actions/SecurityAction'
 import { actionAddTerm } from './actions/TermAction';
+import { actionAddCard } from './actions/CardAction';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
     </Route>
     <Route path="/login" action={actionLogin} />
     <Route path="/addTerm" action={actionAddTerm} />
+    <Route path="/addCard" action={actionAddCard} />
     </>
   )
 )

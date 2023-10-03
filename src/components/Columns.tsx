@@ -7,6 +7,7 @@ import Column from "./Column";
 import ITerm from "../interfaces/ITerm";
 import Library from "../utils/Library";
 import LoadTermObservable from "../observables/LoadTermObservable";
+import LoadDataObservable from "../observables/LoadDataObservable";
 
 const Columns = (props: any) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
@@ -19,8 +20,10 @@ const Columns = (props: any) => {
     const cardService = JsonCardService.getInstance();
     const termService = JsonTermService.getInstance();
     const termObservable = LoadTermObservable.getInstance();
+    const dataObservable = LoadDataObservable.getInstance();
 
     useEffect(() => {
+      dataObservable.addListener(handleLoadTerms);
       setTerm(props.term);
   
       if (!dataLoaded.current) {
@@ -38,6 +41,7 @@ const Columns = (props: any) => {
       termObservable.addListener(handleLoadTerms);
 
       return () => {
+        dataObservable.removeListener(handleLoadTerms);
         termObservable.removeListener(handleLoadTerms);
     };
     }, []);

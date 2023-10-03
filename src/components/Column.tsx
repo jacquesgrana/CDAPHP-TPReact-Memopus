@@ -79,25 +79,40 @@ const Column = (props: any) => {
             />
           </div>
           <div className="div-form-input-term form-group">
-            <label className="div-form-input-label-term" htmlFor="column">
+            <label className="div-form-input-label-term" htmlFor="columnDisplay">
               Colonne :
             </label>
             <input
               className="form-control div-form-input-input-term"
-              type="numeric"
-              name="column"
-              id="column"
+              type="text"
+              name="columnDisplay"
+              id="columnDisplay"
               disabled
               value={props.column.id}
             />
+            <input
+              type="hidden"
+              name="column"
+              id="column"
+              value={props.column.id}
+            />
           </div>
+
           <div className="div-form-input-term form-group">
             <label className="div-form-input-label-term" htmlFor="tid">
               Terme :
             </label>
-            <select className="form-control div-form-input-input-term" name="tid" id="tid">
+            <select
+              className="form-control div-form-input-input-term"
+              name="tid"
+              id="tid"
+            >
               {props.terms.map((term: ITerm) => {
-                return <option key={term.id} value={term.id}>{term.name}</option>;
+                return (
+                  <option key={term.id} value={term.id}>
+                    {term.name}
+                  </option>
+                );
               })}
             </select>
           </div>
