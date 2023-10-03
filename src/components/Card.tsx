@@ -57,28 +57,26 @@ const Card = (props: any) => {
     await cardService.patchCardColumn(id, column);
     // dataObservable.loadData = true;
     // appel fonction notify
-    dataObservable.reloadDatas = true; //
-    dataObservable.notifyListeners(); //
-    // navigate ? --> non
+    dataObservable.reloadDatas = true;
+    dataObservable.notifyListeners();
   }
 
   async function goToRight() {
     const id = props.card.id;
     const column = props.card.column + 1;
     await cardService.patchCardColumn(id, column);
-    dataObservable.reloadDatas = true; //
-    dataObservable.notifyListeners(); //
+    dataObservable.reloadDatas = true;
+    dataObservable.notifyListeners();
   }
 
-  // TODO améliorer
+  // TODO améliorer !!
   function evaluateAnswer() {
     if (answerRef.current !== null) {
       const answerValue = answerRef.current.value;
       if (answerValue === props.card.answer) {
-        //console.log("La réponse est correcte");
         toast.success("La réponse est correcte");
-      } else {
-        //console.log("La réponse est incorrecte");
+      } 
+      else {
         toast.error("La réponse est incorrecte");
       }
     }
@@ -91,7 +89,7 @@ const Card = (props: any) => {
       <div key={props.card.id} className="div-card">
         <div className="d-flex justify-content-center w-100 mb-0">
         <p className="p-card-question">{props.card.question}</p>
-        <button className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-2" onClick={deleteCard}>X</button>
+        <button className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-1" onClick={deleteCard}>X</button>
         </div>
         <div className="d-flex justify-content-center gap-2 w-100">
           {props.card.column !== 1 ? (

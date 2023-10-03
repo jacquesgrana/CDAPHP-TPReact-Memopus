@@ -50,4 +50,20 @@ export default class JsonTermService {
       return null;
     }
   }
+
+  public async deleteTerm(id: number) {
+    try {
+      const response = await fetch(`${this._urlTerms}/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },method: "DELETE"
+      }).then(function (res) {
+        //console.log('res requete', res);
+      });
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
 }

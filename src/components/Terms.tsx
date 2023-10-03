@@ -4,16 +4,21 @@ import JsonTermService from "../services/JsonTermService";
 import ReactModal from "react-modal";
 import { useFetcher } from "react-router-dom";
 import LoadTermObservable from "../observables/LoadTermObservable";
+import { toast } from "react-toastify";
 
 // TODO passer terms dans props ?
 const Term = (props: any) => {
   const [terms, setTerms] = useState<ITerm[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const term = useRef("TOUS");
+  const idTerm = useRef(0);
+
   const fetcher = useFetcher();
   const termService = JsonTermService.getInstance();
   const termObservable = LoadTermObservable.getInstance();
+  
 
   useEffect(() => {
     const loadTerms = async () => {
@@ -38,6 +43,28 @@ const Term = (props: any) => {
     setIsModalOpen(false);
   }
 
+  const deleteTerm = (id: number) => {
+    idTerm.current = id;
+    setIsDeleteConfirmationOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await termService.deleteTerm(idTerm.current);
+      toast.success('Terme supprimé avec succès');
+      setIsDeleteConfirmationOpen(false);
+      termObservable.reloadTerms = true; //
+      termObservable.notifyListeners(); //
+    } 
+    catch (error) {
+      toast.error('Erreur lors de la suppression du terme');
+    }
+  };
+
+  const cancelDelete = () => {
+    setIsDeleteConfirmationOpen(false);
+  };
+
   const loadTerms = async (reload: boolean) => {
     if (reload) {
       const loadedColumns = await termService.loadTerms();
@@ -58,7 +85,6 @@ const Term = (props: any) => {
             return (
               <button
                 onClick={(e) => {
-                  //setTerm(t.name);
                   props.setTerm(t.name);
                   term.current = t.name;
                 }}
@@ -69,10 +95,12 @@ const Term = (props: any) => {
                 }
               >
                 {t.name}
+                <button className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-2" onClick={(e) => deleteTerm(t.id)}>
+              X
+                </button>
               </button>
             );
           })
-          // + t.name ===
         }
         <button
           key={0}
@@ -136,6 +164,21 @@ const Term = (props: any) => {
             </button>
           </div>
         </fetcher.Form>
+      </ReactModal>
+      <ReactModal
+        isOpen={isDeleteConfirmationOpen}
+        onRequestClose={cancelDelete}
+        contentLabel="Confirmation de suppression"
+        className="modal-card"
+        
+      >
+        <div className="form-card">
+          <p className="text-center mt-1 mb-3">Voulez-vous vraiment supprimer cette carte ?</p>
+          <div className="d-flex w-100 gap-2 justify-content-center">
+          <button className="btn btn-success btn-sm btn-modal" onClick={confirmDelete}>Valider</button>
+          <button className="btn btn-warning btn-sm btn-modal" onClick={cancelDelete}>Annuler</button>
+          </div>
+        </div>
       </ReactModal>
     </div>
   );
