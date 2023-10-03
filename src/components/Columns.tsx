@@ -6,6 +6,7 @@ import JsonTermService from "../services/JsonTermService";
 import Column from "./Column";
 import ITerm from "../interfaces/ITerm";
 import Library from "../utils/Library";
+import LoadTermObservable from "../observables/LoadTermObservable";
 
 const Columns = (props: any) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
@@ -14,86 +15,41 @@ const Columns = (props: any) => {
     const [filteredColumns, setFilteredColumns] = useState<IColumn[] | null>(null);
     const dataLoaded = useRef(false);
 
+    const columnService = JsonColumnService.getInstance();
+    const cardService = JsonCardService.getInstance();
+    const termService = JsonTermService.getInstance();
+    const termObservable = LoadTermObservable.getInstance();
+
     //const filteredColumns: any = useRef(() => []);
 
     useEffect(() => {
-      const columnService = JsonColumnService.getInstance();
-      const cardService = JsonCardService.getInstance();
-      const termService = JsonTermService.getInstance();
+      
+
       setTerm(props.term);
+
+      /*
       const loadData = async () => {
-        const loadedColumns = await columnService.loadColumns();
-        const loadedCards = await cardService.loadCards();
-        const loadedTerms = await termService.loadTerms();
-  
-        if (loadedColumns !== null && loadedCards !== null) {
-          const addedIdCards: Set<number> = new Set();
-          const columnsCopy = [...loadedColumns];
-  
-          loadedCards.forEach(card => {
-            columnsCopy.forEach(column => {
-              if (Number(column.id) === Number(card.column)) {
-                //console.log('columns match !!');
-                if (!addedIdCards.has(card.id)) {
-                  //console.log('pas dans set !!');
-                  column.cards.push(card);
-                  addedIdCards.add(card.id);
-                }
-              }
-            });
-          });
-
-          // affecter les terms des colonnes en travaillant sur columnsCopy
-
-          // si les tableaux loadedTerms et loadedColumns sont non null
-          if(loadedColumns !== null && loadedTerms !== null && columnsCopy.length > 0) {
-            // TODO mettre ailleurs ?
-            setTerms(loadedTerms);
-            // boucle sur les columnsCopy
-
-            columnsCopy.forEach(column => {
-                
-                if(column.cards.length > 0) {
-                    // boucle sur les cards de la colonne en cours 
-                    column.cards.forEach(card => {
-                        // recuperer card.tid 
-                        const termId = card.tid;
-                        // chercher dans loadedTerms le term avec id=tid
-                        const term = loadedTerms.filter(t => t.id === termId)[0];
-
-                        // si term pas dans terms
-                        if(!column.terms.some(t => t.id === termId)) {
-                            // affecter dans terms le term obtenu
-                            column.terms.push(term);
-                        }
-                            
-                    });
-                        
-                }
-                
-            });
-            
-          }
-          
-  
-          setColumns(columnsCopy);
-          //filteredColumns.current = [ ...columnsCopy];
-          setFilteredColumns([ ...columnsCopy]);
-          dataLoaded.current = true;
-          //console.log('terms :', loadedTerms);
-          //console.log('cards :', loadedCards);
-          //console.log('columns :', columnsCopy);
-        }
-      };
+        loadDatasFctn();
+      };*/
   
       if (!dataLoaded.current) {
-        loadData();
+        loadDatasFctn();
       }
     }, [dataLoaded, term, props.term]);
 
     useEffect(() => {
       setTerm(props.term);
     }, [props.term]);
+
+    useEffect(() => {}, [terms]);
+
+    useEffect(() => {
+      termObservable.addListener(handleLoadTerms);
+
+      return () => {
+        termObservable.removeListener(handleLoadTerms);
+    };
+    }, []);
    
     useEffect(() => {
       if (columns !== null) {
@@ -101,6 +57,77 @@ const Columns = (props: any) => {
         setFilteredColumns(newFilteredColumns);
       }
     }, [term, columns]);
+
+    const handleLoadTerms = (loadTerms: boolean) => {
+      if(loadTerms) {
+        loadDatasFctn();
+      }
+    }
+
+    const loadDatasFctn = async () => {
+      const loadedColumns = await columnService.loadColumns();
+      const loadedCards = await cardService.loadCards();
+      const loadedTerms = await termService.loadTerms();
+
+      if (loadedColumns !== null && loadedCards !== null) {
+        const addedIdCards: Set<number> = new Set();
+        const columnsCopy = [...loadedColumns];
+
+        loadedCards.forEach(card => {
+          columnsCopy.forEach(column => {
+            if (Number(column.id) === Number(card.column)) {
+              //console.log('columns match !!');
+              if (!addedIdCards.has(card.id)) {
+                //console.log('pas dans set !!');
+                column.cards.push(card);
+                addedIdCards.add(card.id);
+              }
+            }
+          });
+        });
+
+        // affecter les terms des colonnes en travaillant sur columnsCopy
+
+        // si les tableaux loadedTerms et loadedColumns sont non null
+        if(loadedColumns !== null && loadedTerms !== null && columnsCopy.length > 0) {
+          // TODO mettre ailleurs ?
+          setTerms(loadedTerms);
+          // boucle sur les columnsCopy
+
+          columnsCopy.forEach(column => {
+              
+              if(column.cards.length > 0) {
+                  // boucle sur les cards de la colonne en cours 
+                  column.cards.forEach(card => {
+                      // recuperer card.tid 
+                      const termId = card.tid;
+                      // chercher dans loadedTerms le term avec id=tid
+                      const term = loadedTerms.filter(t => t.id === termId)[0];
+
+                      // si term pas dans terms
+                      if(!column.terms.some(t => t.id === termId)) {
+                          // affecter dans terms le term obtenu
+                          column.terms.push(term);
+                      }
+                          
+                  });
+                      
+              }
+              
+          });
+          
+        }
+        
+
+        setColumns(columnsCopy);
+        //filteredColumns.current = [ ...columnsCopy];
+        setFilteredColumns([ ...columnsCopy]);
+        dataLoaded.current = true;
+        //console.log('terms :', loadedTerms);
+        //console.log('cards :', loadedCards);
+        //console.log('columns :', columnsCopy);
+      }
+    }
     
 
 /*
@@ -115,6 +142,7 @@ const Columns = (props: any) => {
     
     useEffect(() => {}, [filteredColumns]);
 
+    useEffect(() => {}, [terms]);
     
     //console.log('columns :', columns);
     
