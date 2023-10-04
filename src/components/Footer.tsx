@@ -1,3 +1,8 @@
+/**
+ * Composant du footer du site
+ * @param props 
+ * @returns 
+ */
 const Footer = (props: any) => {
     return (
       <footer>

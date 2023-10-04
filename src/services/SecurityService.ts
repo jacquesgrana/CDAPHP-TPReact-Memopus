@@ -2,6 +2,10 @@ import { toast } from "react-toastify";
 import IUser from "../interfaces/IUser";
 import JsonUserService from "./JsonUserService";
 
+/**
+ * Classe qui gère la connexion d'un user
+ * Utilise les patterns singleton et observer
+ */
 export default class SecurityService {
   private _isLogged: boolean = false;
   private _id: string | null = null;
@@ -11,11 +15,6 @@ export default class SecurityService {
   private static _instance: SecurityService | null = null;
 
   private constructor() {}
-
-  /*
-  public static getInstance(): SecurityService {
-    return this._instance === null ? new SecurityService() : this._instance;
-  }*/
 
   /**
    * Design pattern singleton
@@ -75,36 +74,30 @@ export default class SecurityService {
     this._username = usernameToSet;
   }
 
+  /**
+   * Fonction qui renvoi vrai si username/pwd sont reconnus dans la bd
+   * @param username 
+   * @param pwd 
+   * @returns 
+   */
   public async connect(username: string, pwd: string): Promise<boolean | void> {
-    //console.log('SecuServ : username :', username);
-    //console.log('SecuServ : pwd :', pwd);
     const userService = JsonUserService.getInstance();
-    // charger liste utilisateur
-    // appeler fonction JsonUserService qui renvoie la liste
     const users = (await userService.loadUsers()) as IUser[];
-    // faire un some sur la liste
     const isUserMatch = users.some(
       (u) => u.username === username && u.pwd === pwd
     );
     this._isLogged = isUserMatch;
-    //console.log('SecuServ : isUserMatch :', isUserMatch);
-    return isUserMatch ? true : false;
-    // si filter renvoie une valeur --> ok
-    // si filter renvoie rien --> ko
-    // set isLogged a la fin
+    return isUserMatch;
   }
 
+  /**
+   * Fonction fait la déconnexion et appelle une callback
+   * @param callback 
+   */
   public async disconnect(callback: () => void) {
     this._isLogged = false;
     this.notifyListeners();
     toast.success('Déconnexion');
     callback();
   }
-/*
-  public async disconnect() {
-    this._isLogged = false; //
-    this.notifyListeners(); //
-    toast.success('Déconnexion');
-    return redirect("/connect");
-  }*/
 }

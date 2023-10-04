@@ -6,7 +6,6 @@ import { useFetcher } from "react-router-dom";
 import LoadTermObservable from "../observables/LoadTermObservable";
 import { toast } from "react-toastify";
 
-// TODO passer terms dans props ?
 const Term = (props: any) => {
   const [terms, setTerms] = useState<ITerm[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,11 +20,12 @@ const Term = (props: any) => {
   
 
   useEffect(() => {
+    /*
     const loadTerms = async () => {
       const loadedColumns = await termService.loadTerms();
       setTerms(loadedColumns);
-    };
-    loadTerms();
+    };*/
+    loadTerms(true);
     termObservable.addListener(loadTerms);
 
     return () => {
@@ -53,8 +53,8 @@ const Term = (props: any) => {
       await termService.deleteTerm(idTerm.current);
       toast.success('Terme supprimé avec succès');
       setIsDeleteConfirmationOpen(false);
-      termObservable.reloadTerms = true; //
-      termObservable.notifyListeners(); //
+      termObservable.reloadTerms = true;
+      termObservable.notifyListeners();
     } 
     catch (error) {
       toast.error('Erreur lors de la suppression du terme');
@@ -67,15 +67,11 @@ const Term = (props: any) => {
 
   const loadTerms = async (reload: boolean) => {
     if (reload) {
-      const loadedColumns = await termService.loadTerms();
-      setTerms(loadedColumns);
-      //console.log("terms reload");
-      //termObservable.reloadTerms = false;
+      const loadedTerms = await termService.loadTerms();
+      setTerms(loadedTerms);
     }
   };
 
-  //const columns: any = useLoaderData();
-  //console.log('column component : columns :', props.columns);
   return (
     <div className="">
       <h4 className="text-center my-3">Termes</h4>
@@ -173,7 +169,7 @@ const Term = (props: any) => {
         
       >
         <div className="form-card">
-          <p className="text-center mt-1 mb-3">Voulez-vous vraiment supprimer cette carte ?</p>
+          <p className="text-center mt-1 mb-3">Voulez-vous vraiment supprimer ce terme ?</p>
           <div className="d-flex w-100 gap-2 justify-content-center">
           <button className="btn btn-success btn-sm btn-modal" onClick={confirmDelete}>Valider</button>
           <button className="btn btn-warning btn-sm btn-modal" onClick={cancelDelete}>Annuler</button>

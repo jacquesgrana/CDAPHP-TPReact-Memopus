@@ -1,11 +1,13 @@
 import IUser from "../interfaces/IUser";
 
+/**
+ * Classe gérant les accès au fichier json par json-server
+ * concernant le table des users
+ * Utilise le pattern singleton
+ */
 export default class JsonUserService {
     private _url: string = "http://localhost:3001/";
     private _urlUsers: string = this._url + "users";
-    //private _urlColumns: string = this._url + "colums";
-    //private _urlTerms: string = this._url + "terms";
-    //private _urlCards: string = this._url + "cards";
 
     private static _instance: JsonUserService | null = null;
 
@@ -18,7 +20,10 @@ export default class JsonUserService {
         return this._instance;
       }
     
-
+    /**
+     * Fonction qui récupère et renvoi la liste des users
+     * @returns 
+     */
     public async loadUsers(): Promise<IUser[] | void> {
         return fetch(this._urlUsers)
         .then(response => {
@@ -33,7 +38,11 @@ export default class JsonUserService {
         })
     }
 
-    /** a tester, pas sur que ca marche */
+    /**
+     * Fonction qui récupère un user par son username
+     * @param username 
+     * @returns 
+     */
     public async loadByUsername(username: string): Promise<IUser[] | void> {
         return fetch(`${this._urlUsers}?username=${username}`, {
             headers: {

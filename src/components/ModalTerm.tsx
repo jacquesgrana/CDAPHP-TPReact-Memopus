@@ -2,6 +2,10 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import { useFetcher } from "react-router-dom";
 
+/**
+ * TODO A supprimer ? ou utiliser ?
+ * @returns 
+ */
 const ModalTerm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const fetcher = useFetcher();

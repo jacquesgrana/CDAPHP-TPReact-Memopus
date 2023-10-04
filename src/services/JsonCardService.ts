@@ -1,10 +1,12 @@
 import ICard from "../interfaces/ICard";
 
+/**
+ * Classe gérant les accès au fichier json par json-server
+ * concernant le table des cards
+ * Utilise le pattern singleton
+ */
 export default class JsonCardService {
     private _url: string = "http://localhost:3001/";
-    //private _urlUsers: string = this._url + "users";
-    //private _urlColumns: string = this._url + "colums";
-    //private _urlTerms: string = this._url + "terms";
     private _urlCards: string = this._url + "cards";
 
     private static _instance: JsonCardService | null = null;
@@ -18,7 +20,10 @@ export default class JsonCardService {
         return this._instance;
       }
 
-
+    /**
+     * Fonction qui récupère et renvoi la liste des cards
+     * @returns 
+     */
     public async loadCards(): Promise<ICard[] | null> {
         try {
             const response = await fetch(this._urlCards, {
@@ -35,10 +40,13 @@ export default class JsonCardService {
         }
     }
 
+    /**
+     * Fonction qui fait la requête d'insertion d'une card
+     * @param card 
+     * @returns 
+     */
     public async addCard(card: ICard) {
       try {
-        //card.column = Number(card.column);
-        //card.tid = Number(card.tid);
         const response = await fetch(this._urlCards, {
           headers: {
             Accept: "application/json",
@@ -55,10 +63,15 @@ export default class JsonCardService {
       }
     }
 
+    /**
+     * Fonction qui fait la requête PATCH pour mettre à jour 
+     * column d'une card selon son id
+     * @param id 
+     * @param column 
+     * @returns 
+     */
     public async patchCardColumn(id: number, column: number) {
       try {
-        //card.column = Number(card.column);
-        //card.tid = Number(card.tid);
         const response = await fetch(`${this._urlCards}/${id}`, {
           headers: {
             Accept: "application/json",
@@ -75,6 +88,12 @@ export default class JsonCardService {
       }
     }
 
+    /**
+     * Fonction qui fait la requête DELETE d'une card 
+     * selon son id
+     * @param id 
+     * @returns 
+     */
     public async deleteCard(id: number) {
       try {
         const response = await fetch(`${this._urlCards}/${id}`, {

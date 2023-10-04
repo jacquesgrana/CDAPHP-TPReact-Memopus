@@ -1,3 +1,7 @@
+/**
+ * Classe utilisant les design patterns 'singleton' et 'observer'
+ * pour provoquer la mise à jour des données et des affichages
+ */
 export default class LoadDataObservable {
     private _reloadDatas: boolean = false;
     
@@ -7,7 +11,7 @@ export default class LoadDataObservable {
 
     private constructor() {}
 
-    /**
+  /**
    * Design pattern singleton
    * @returns LoadTermObservable
    */
@@ -20,6 +24,7 @@ export default class LoadDataObservable {
 
   /**
    * Design pattern observer pour répercuter _reloadDatas
+   * qui provoque la mise à jour des données et de l'affichage
    */
   public notifyListeners() {
     this.listeners.forEach((listener) => {

@@ -2,6 +2,12 @@ import IColumn from "../interfaces/IColumn";
 
 export default class Library {
 
+    /**
+     * Fonction qui filtre columns selon un term
+     * @param columns 
+     * @param term 
+     * @returns tableaux de column résultat du filtrage
+     */
     public static filterColumnsByTerm(columns: IColumn[], term: string): IColumn[] {
 
         if(term !== 'TOUS') {

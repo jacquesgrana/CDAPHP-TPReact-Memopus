@@ -27,7 +27,7 @@ function App() {
     else {
       setIsLogged(true);
     }
-  }, [security.isLogged]);
+  }, [security.isLogged]); // <-- modifier?
 
   return (
     <div className="App container" id="container_all">

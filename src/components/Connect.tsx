@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useFetcher } from "react-router-dom";
 
+/**
+ * Composant Connect, appelé par le routeur, qui affiche 
+ * le formulaire de connexion
+ * @returns 
+ */
 const Connect = () => {
   const [isPwdVisible, setIsPwdVisible] = useState<boolean>(false);
   const [username, setUsername] = useState("");

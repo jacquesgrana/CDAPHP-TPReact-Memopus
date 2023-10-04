@@ -5,11 +5,12 @@ import LoadDataObservable from "../observables/LoadDataObservable";
 import JsonCardService from "../services/JsonCardService";
 
 /**
- * 
- * @param props Composant Card représentant une question 
+ * Composant Card représentant une question 
  * et ses propriétés.
+ * @param props 
  * @returns 
  */
+  // TODO faire interface pour typer les props
 const Card = (props: any) => {
   const [isModalQuestionOpen, setIsModalQuestionOpen] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -18,37 +19,56 @@ const Card = (props: any) => {
   const dataObservable = LoadDataObservable.getInstance();
   const cardService = JsonCardService.getInstance();
 
-  function openModalCard() {
+  /**
+   * gestion de la modale pour accéder à la question
+   */
+  function openModalCard(): void {
     setIsModalQuestionOpen(true);
   }
 
-  function closeModalCard() {
+   /**
+   * gestion de la modale pour accéder à la question
+   */
+  function closeModalCard(): void {
     setIsModalQuestionOpen(false);
   }
   
-  const deleteCard = () => {
+  /**
+   * Fonction qui ouvre la modale de confirmation
+   */
+  const deleteCard = (): void => {
     setIsDeleteConfirmationOpen(true);
   };
 
-  const confirmDelete = async () => {
+  /**
+   * Fonction qui réalise, après confirmation, la suppression 
+   * de la question, avec utilisation de dataObservable pour 
+   * la mise à jours des données et de l'affichage
+   */
+  const confirmDelete = async (): Promise<void> => {
     const id = props.card.id;
-
     try {
       await cardService.deleteCard(id);
-      toast.success('Carte supprimée avec succès');
+      toast.success('Question supprimée avec succès');
       setIsDeleteConfirmationOpen(false);
-      dataObservable.reloadDatas = true; //
-      dataObservable.notifyListeners(); //
+      dataObservable.reloadDatas = true;
+      dataObservable.notifyListeners();
     } catch (error) {
-      toast.error('Erreur lors de la suppression de la carte');
+      toast.error('Erreur lors de la suppression de la question');
     }
   };
 
-  const cancelDelete = () => {
+  /**
+   * Fonction qui ferme la modale de confirmation
+   */
+  const cancelDelete = (): void => {
     setIsDeleteConfirmationOpen(false);
   };
 
-  async function goToLeft() {
+  /**
+   * Fonction qui 'déplace' un question vers la colonne de gauche
+   */
+  async function goToLeft(): Promise<void> {
     // récupérer l'id de la card
     const id = props.card.id;
     // calculer la nouvelle valeur de column
@@ -61,7 +81,10 @@ const Card = (props: any) => {
     dataObservable.notifyListeners();
   }
 
-  async function goToRight() {
+   /**
+   * Fonction qui 'déplace' un question vers la colonne de droite
+   */
+  async function goToRight(): Promise<void> {
     const id = props.card.id;
     const column = props.card.column + 1;
     await cardService.patchCardColumn(id, column);
@@ -70,6 +93,9 @@ const Card = (props: any) => {
   }
 
   // TODO améliorer !!
+  /**
+   * Fonction qui évalue la réponse et affiche un toast en conséquence
+   */
   function evaluateAnswer() {
     if (answerRef.current !== null) {
       const answerValue = answerRef.current.value;
@@ -81,9 +107,7 @@ const Card = (props: any) => {
       }
     }
   }
-
-  // TODO faire interface pour typer les props
-  // useRef et useState pour la card ?
+  
   return (
     <>
       <div key={props.card.id} className="div-card">

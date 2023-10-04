@@ -9,6 +9,13 @@ import Library from "../utils/Library";
 import LoadTermObservable from "../observables/LoadTermObservable";
 import LoadDataObservable from "../observables/LoadDataObservable";
 
+/**
+ * Composant Columns représentant une liste de 4 colonnes 
+ * et ses propriétés, dont une liste de column
+ * @param props 
+ * @returns 
+ */
+  // TODO faire interface pour typer les props
 const Columns = (props: any) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
     const [terms, setTerms] = useState<ITerm[] | null>(null);
@@ -46,6 +53,9 @@ const Columns = (props: any) => {
     };
     }, []);
    
+    /**
+     * Appele la fonction de filtrage de la librairie
+     */
     useEffect(() => {
       if (columns !== null) {
         const newFilteredColumns = Library.filterColumnsByTerm(columns, term);
@@ -57,12 +67,22 @@ const Columns = (props: any) => {
 
     useEffect(() => {}, [terms]);
 
+    /**
+     * Fonction callback déclenchée par un observable 
+     * si le booleen est à true qui appelle la fonction de 
+     * chargement/peuplement des données
+     * @param loadTerms
+     */
     const handleLoadTerms = (loadTerms: boolean) => {
       if(loadTerms) {
         loadDatasFctn();
       }
     }
 
+    /**
+     * Fonction qui charge les différentes tables 
+     * et peuple les column avec leur cards et leur terms
+     */
     const loadDatasFctn = async () => {
       const loadedColumns = await columnService.loadColumns();
       const loadedCards = await cardService.loadCards();
@@ -85,7 +105,6 @@ const Columns = (props: any) => {
           });
         });
 
-        // affecter les terms des colonnes en travaillant sur columnsCopy
 
         // si les tableaux loadedTerms et loadedColumns sont non null
         if(loadedColumns !== null && loadedTerms !== null && columnsCopy.length > 0) {
@@ -119,7 +138,6 @@ const Columns = (props: any) => {
         
 
         setColumns(columnsCopy);
-        //filteredColumns.current = [ ...columnsCopy];
         setFilteredColumns([ ...columnsCopy]);
         dataLoaded.current = true;
         //console.log('terms :', loadedTerms);

@@ -1,32 +1,15 @@
-/*
-
-import { useEffect, useState } from "react";
-import SecurityService from "../services/SecurityService";
-
-const Header = (props: any) => {
-    const securityService = SecurityService.getInstance();
-    const [isLogged, setIsLogged] = useState<boolean
-    >(props.isLogged);
-
-    useEffect(() => {
-        setIsLogged(props.isLogged);
-        console.log('isLogged', isLogged);
-    }, [props.isLogged]);
-
-    return (
-    <header>
-      <h1 className="text-center">Header</h1>
-      <p>{(props.isLogged ? "Utilisateur connecté" : "Non connecté")}</p>
-    </header>
-  );
-};
-
-export default Header;
-*/
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import SecurityService from "../services/SecurityService";
 
+/**
+ * Composant du header du site
+ * S'inscrit à l'observable securityService pour afficher,
+ * si un user est connecté, le nom de l'user connecté 
+ * et le bouton de déconnexion
+ * @param props 
+ * @returns 
+ */
 const Header = (props: any) => {
   const navigate = useNavigate();
   const securityService = SecurityService.getInstance();
@@ -45,6 +28,10 @@ const Header = (props: any) => {
     };
   }, [securityService]);
 
+  /**
+   * Fonction qui appelle la déconnexion et envoi une callback
+   * qui redirige sur la route '/connect'
+   */
   const handleLogout = () => {
     securityService.disconnect(() => {
       navigate('/connect');

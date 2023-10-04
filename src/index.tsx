@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './scss/index.scss';
 import App from './components/App';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-//import SecurityService from './services/SecurityService';
 import Home from './components/Home';
 import Connect from './components/Connect';
 import { actionLogin } from './actions/SecurityAction'
@@ -14,7 +13,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-//const security = SecurityService.getInstance();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,8 +28,6 @@ const router = createBrowserRouter(
     </>
   )
 )
-
-
 
 root.render(
   <React.StrictMode>

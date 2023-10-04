@@ -5,24 +5,32 @@ import { useFetcher } from "react-router-dom";
 import ReactModal from "react-modal";
 import ITerm from "../interfaces/ITerm";
 
+/**
+ * Composant Column représentant une colonne 
+ * et ses propriétés, dont une liste de card
+ * @param props 
+ * @returns 
+ */
+  // TODO faire interface pour typer les props
 const Column = (props: any) => {
   const [isModalCardOpen, setIsModalCardOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const fetcher = useFetcher();
 
-  // TODO utiliser un useState et un useEffect pour column ?
-
-  // TODO faire interface pour typer les props
+  /**
+   * Fonction qui ouvre la modale de création d'une question (card)
+   */
   function openModalCard() {
     setIsModalCardOpen(true);
-    //console.log('clic');
   }
 
+   /**
+   * Fonction qui ferme la modale de création d'une question (card)
+   */
   function closeModalCard() {
     setIsModalCardOpen(false);
   }
-  //console.log('props.terms :', props.terms);
 
   return (
     <>
@@ -48,9 +56,7 @@ const Column = (props: any) => {
           action="/addCard"
           method="POST"
           onSubmit={(e) => {
-            //e.preventDefault();
             closeModalCard();
-            //loadTerms();
           }}
         >
           <h2 className="text-center h3 mt-1 mb-3">

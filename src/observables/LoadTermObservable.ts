@@ -1,3 +1,7 @@
+/**
+ * Classe utilisant les design patterns 'singleton' et 'observer'
+ * pour provoquer la mise à jour des terms et des affichages
+ */
 export default class LoadTermObservable {
     private _reloadTerms: boolean = false;
     
@@ -22,8 +26,6 @@ export default class LoadTermObservable {
    * Design pattern observer pour répercuter _reloadTerms
    */
   public notifyListeners() {
-    //console.log('notify :');
-    //console.log('listeners :', this.listeners)
     this.listeners.forEach((listener) => {
       listener(this._reloadTerms);
     });
@@ -31,7 +33,6 @@ export default class LoadTermObservable {
   }
 
   public addListener(listener: Function): void {
-    //console.log('add listener')
     this.listeners.push(listener);
   }
 
