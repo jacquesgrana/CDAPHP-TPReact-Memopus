@@ -20,11 +20,6 @@ const Term = (props: any) => {
   
 
   useEffect(() => {
-    /*
-    const loadTerms = async () => {
-      const loadedColumns = await termService.loadTerms();
-      setTerms(loadedColumns);
-    };*/
     loadTerms(true);
     termObservable.addListener(loadTerms);
 
@@ -91,9 +86,9 @@ const Term = (props: any) => {
                 }
               >
                 {t.name}
-                <button className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-2" onClick={(e) => deleteTerm(t.id)}>
+                <div className="btn btn-danger btn-sm mb-1 btn-card-sm py-0 ms-2" onClick={(e) => deleteTerm(t.id)}>
               X
-                </button>
+                </div>
               </button>
             );
           })
@@ -105,7 +100,6 @@ const Term = (props: any) => {
             ("TOUS" === term.current ? "term-selected" : "")
           }
           onClick={(e) => {
-            //setTerm("TOUS");
             props.setTerm("TOUS");
             term.current = "TOUS";
           }}
@@ -127,9 +121,7 @@ const Term = (props: any) => {
           action="/addTerm"
           method="POST"
           onSubmit={(e) => {
-            //e.preventDefault();
             closeModalTerm();
-            //loadTerms();
           }}
         >
           <h2 className="text-center h3 mt-1 mb-3">Créer un nouveau terme</h2>

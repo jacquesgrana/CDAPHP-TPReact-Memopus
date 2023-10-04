@@ -1,3 +1,4 @@
+import Config from "../configs/Config";
 import IUser from "../interfaces/IUser";
 
 /**
@@ -6,8 +7,8 @@ import IUser from "../interfaces/IUser";
  * Utilise le pattern singleton
  */
 export default class JsonUserService {
-    private _url: string = "http://localhost:3001/";
-    private _urlUsers: string = this._url + "users";
+    //private _url: string = "http://localhost:3001/";
+    private _urlUsers: string = Config.SERVER_URL + "/users";
 
     private static _instance: JsonUserService | null = null;
 

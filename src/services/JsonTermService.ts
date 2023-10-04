@@ -1,3 +1,4 @@
+import Config from "../configs/Config";
 import ITerm from "../interfaces/ITerm";
 
 /**
@@ -6,8 +7,7 @@ import ITerm from "../interfaces/ITerm";
  * Utilise le pattern singleton
  */
 export default class JsonTermService {
-  private _url: string = "http://localhost:3001/";
-  private _urlTerms: string = this._url + "terms";
+  private _urlTerms: string = Config.SERVER_URL + "/terms";
 
   private static _instance: JsonTermService | null = null;
 

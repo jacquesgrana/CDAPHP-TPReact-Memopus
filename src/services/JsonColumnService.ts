@@ -1,3 +1,4 @@
+import Config from "../configs/Config";
 import IColumn from "../interfaces/IColumn";
 
 /**
@@ -6,8 +7,7 @@ import IColumn from "../interfaces/IColumn";
  * Utilise le pattern singleton
  */
 export default class JsonColumnService {
-    private _url: string = "http://localhost:3001/";
-    private _urlColumns: string = this._url + "columns";
+    private _urlColumns: string = Config.SERVER_URL + "/columns";
 
     private static _instance: JsonColumnService | null = null;
 

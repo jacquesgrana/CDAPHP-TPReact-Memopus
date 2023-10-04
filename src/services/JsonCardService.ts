@@ -1,3 +1,4 @@
+import Config from "../configs/Config";
 import ICard from "../interfaces/ICard";
 
 /**
@@ -6,8 +7,7 @@ import ICard from "../interfaces/ICard";
  * Utilise le pattern singleton
  */
 export default class JsonCardService {
-    private _url: string = "http://localhost:3001/";
-    private _urlCards: string = this._url + "cards";
+    private _urlCards: string = Config.SERVER_URL + "/cards";
 
     private static _instance: JsonCardService | null = null;
 
