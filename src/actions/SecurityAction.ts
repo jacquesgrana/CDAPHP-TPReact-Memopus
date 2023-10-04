@@ -28,8 +28,8 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
 
     if (isConnected) {
         security.username = username;
-        security.isLogged = true; //
-        security.notifyListeners(); //
+        security.isLogged = true;
+        security.notifyListeners();
         const users = await JsonUserService.getInstance().loadByUsername(username) as IUser[];
         if(users.length > 0) {
             security.id = users[0].id;
@@ -37,8 +37,8 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
         toast.success('Connexion réussie');
         return redirect("/home");
     } else {
-        security.isLogged = false; //
-        security.notifyListeners(); //
+        security.isLogged = false;
+        security.notifyListeners();
         toast.error('Utilisateur non reconnu');
         return redirect("/connect");
     }

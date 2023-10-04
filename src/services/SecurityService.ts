@@ -72,7 +72,7 @@ export default class SecurityService {
   }
 
   /**
-   * Fonction qui renvoi vrai si username/pwd sont reconnus dans la bd
+   * Fonction qui renvoie vrai si username/pwd sont reconnus dans la bd
    * @param username 
    * @param pwd 
    * @returns 

@@ -95,9 +95,7 @@ const Columns = (props: ColumnsProps) => {
         loadedCards.forEach(card => {
           columnsCopy.forEach(column => {
             if (Number(column.id) === Number(card.column)) {
-              //console.log('columns match !!');
               if (!addedIdCards.has(card.id)) {
-                //console.log('pas dans set !!');
                 column.cards.push(card);
                 addedIdCards.add(card.id);
               }
@@ -106,43 +104,24 @@ const Columns = (props: ColumnsProps) => {
         });
 
 
-        // si les tableaux loadedTerms et loadedColumns sont non null
         if(loadedColumns !== null && loadedTerms !== null && columnsCopy.length > 0) {
-          // TODO mettre ailleurs ?
           setTerms(loadedTerms);
-          // boucle sur les columnsCopy
-
           columnsCopy.forEach(column => {
-              
               if(column.cards.length > 0) {
-                  // boucle sur les cards de la colonne en cours 
                   column.cards.forEach(card => {
-                      // recuperer card.tid 
                       const termId = card.tid;
-                      // chercher dans loadedTerms le term avec id=tid
                       const term = loadedTerms.filter(t => t.id === termId)[0];
-
-                      // si term pas dans terms
                       if(!column.terms.some(t => t.id === termId)) {
-                          // affecter dans terms le term obtenu
                           column.terms.push(term);
-                      }
-                          
-                  });
-                      
+                      }     
+                  });      
               }
-              
           });
-          
         }
         
-
         setColumns(columnsCopy);
         setFilteredColumns([ ...columnsCopy]);
         dataLoaded.current = true;
-        //console.log('terms :', loadedTerms);
-        //console.log('cards :', loadedCards);
-        //console.log('columns :', columnsCopy);
       }
     }
     return (

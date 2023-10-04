@@ -9,7 +9,7 @@ import LoadDataObservable from "../observables/LoadDataObservable";
  * qui récupère les données du formulaire, construit l'objet à insérer
  * et demande la requête d'insertion.
  * Avec, après, demande de notification par l'observable LoadDataObservable
- * aux observers pour la mise à jour de l'affichage.
+ * aux observers pour la mise à jour des données et de l'affichage.
  * @param param0 
  * @returns 
  */

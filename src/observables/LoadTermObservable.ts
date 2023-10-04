@@ -1,6 +1,6 @@
 /**
  * Classe utilisant les design patterns 'singleton' et 'observer'
- * pour provoquer la mise à jour des terms et des affichages
+ * utilisée pour provoquer la mise à jour des terms
  */
 export default class LoadTermObservable {
     private _reloadTerms: boolean = false;

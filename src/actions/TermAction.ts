@@ -23,7 +23,7 @@ export const actionAddTerm = async({request}: ActionFunctionArgs) => {
     if(terms !== undefined) {
         const map = terms?.map(t => t.id);
         if (map !== undefined) {
-            const maxId = Math.max(...map);
+            const maxId = Math.max( ...map);
             const selected = false;
             const newTerm: ITerm = {
                 id: maxId+1,
@@ -32,8 +32,8 @@ export const actionAddTerm = async({request}: ActionFunctionArgs) => {
             };
             await termService.addTerm(newTerm);
             toast.success('Nouveau Terme ajouté : ' + newTerm.name);
-            termObservable.reloadTerms = true; //
-            termObservable.notifyListeners(); //
+            termObservable.reloadTerms = true;
+            termObservable.notifyListeners();
             return redirect("/home");
         }
     }

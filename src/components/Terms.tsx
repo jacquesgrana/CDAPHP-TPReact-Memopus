@@ -85,7 +85,7 @@ const Term = (props: TermsProps) => {
   };
 
   /**
-   * Fonction qui charge la liste des terms
+   * Fonction qui charge la liste des terms si reload est à true
    * @param reload 
    */
   const loadTerms = async (reload: boolean) => {

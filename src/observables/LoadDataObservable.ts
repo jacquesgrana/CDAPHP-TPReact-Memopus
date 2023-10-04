@@ -1,6 +1,7 @@
 /**
  * Classe utilisant les design patterns 'singleton' et 'observer'
- * pour provoquer la mise à jour des données et des affichages
+ * utilisée pour provoquer la mise à jour des données et des 
+ * affichages
  */
 export default class LoadDataObservable {
     private _reloadDatas: boolean = false;

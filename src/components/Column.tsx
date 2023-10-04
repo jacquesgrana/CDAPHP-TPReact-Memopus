@@ -12,7 +12,6 @@ import ColumnProps from "../props/ColumnProps";
  * @param props 
  * @returns 
  */
-  // TODO faire interface pour typer les props
 const Column = (props: ColumnProps) => {
   const [isModalCardOpen, setIsModalCardOpen] = useState(false);
   const [question, setQuestion] = useState("");
