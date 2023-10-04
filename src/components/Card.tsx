@@ -3,6 +3,7 @@ import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 import LoadDataObservable from "../observables/LoadDataObservable";
 import JsonCardService from "../services/JsonCardService";
+import CardProps from "../props/CardProps";
 
 /**
  * Composant Card représentant une question 
@@ -10,8 +11,7 @@ import JsonCardService from "../services/JsonCardService";
  * @param props 
  * @returns 
  */
-  // TODO faire interface pour typer les props
-const Card = (props: any) => {
+const Card = (props: CardProps) => {
   const [isModalQuestionOpen, setIsModalQuestionOpen] = useState(false);
   const [answer, setAnswer] = useState("");
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
@@ -69,14 +69,9 @@ const Card = (props: any) => {
    * Fonction qui 'déplace' un question vers la colonne de gauche
    */
   async function goToLeft(): Promise<void> {
-    // récupérer l'id de la card
     const id = props.card.id;
-    // calculer la nouvelle valeur de column
     const column = props.card.column - 1;
-    // faire requete de patch sur column
     await cardService.patchCardColumn(id, column);
-    // dataObservable.loadData = true;
-    // appel fonction notify
     dataObservable.reloadDatas = true;
     dataObservable.notifyListeners();
   }

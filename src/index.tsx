@@ -13,7 +13,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-
+/**
+ * Routes et actions, import du scss
+ */
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>

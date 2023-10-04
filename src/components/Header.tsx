@@ -10,7 +10,7 @@ import SecurityService from "../services/SecurityService";
  * @param props 
  * @returns 
  */
-const Header = (props: any) => {
+const Header = () => {
   const navigate = useNavigate();
   const securityService = SecurityService.getInstance();
   const [isLogged, setIsLogged] = useState<boolean>(securityService.isLogged);
@@ -19,9 +19,7 @@ const Header = (props: any) => {
     const updateIsLogged = (newIsLogged: boolean) => {
       setIsLogged(newIsLogged);
     };
-
     securityService.addListener(updateIsLogged);
-    //console.log('apres ajout listener');
     
     return () => {
       securityService.removeListener(updateIsLogged);

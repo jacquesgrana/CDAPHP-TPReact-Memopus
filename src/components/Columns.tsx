@@ -8,6 +8,7 @@ import ITerm from "../interfaces/ITerm";
 import Library from "../utils/Library";
 import LoadTermObservable from "../observables/LoadTermObservable";
 import LoadDataObservable from "../observables/LoadDataObservable";
+import ColumnsProps from "../props/ColumnsProps";
 
 /**
  * Composant Columns représentant une liste de 4 colonnes 
@@ -15,8 +16,7 @@ import LoadDataObservable from "../observables/LoadDataObservable";
  * @param props 
  * @returns 
  */
-  // TODO faire interface pour typer les props
-const Columns = (props: any) => {
+const Columns = (props: ColumnsProps) => {
     const [columns, setColumns] = useState<IColumn[] | null>(null);
     const [terms, setTerms] = useState<ITerm[] | null>(null);
     const [term, setTerm] = useState<string>("TOUS");

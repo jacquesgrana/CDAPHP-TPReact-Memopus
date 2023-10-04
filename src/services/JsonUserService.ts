@@ -22,7 +22,7 @@ export default class JsonUserService {
       }
     
     /**
-     * Fonction qui récupère et renvoi la liste des users
+     * Fonction qui récupère et renvoie la liste des users
      * @returns 
      */
     public async loadUsers(): Promise<IUser[] | void> {

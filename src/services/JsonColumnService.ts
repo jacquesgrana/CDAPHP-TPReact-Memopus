@@ -21,7 +21,7 @@ export default class JsonColumnService {
       }
 
           /**
-     * Fonction qui récupère et renvoi la liste des columns
+     * Fonction qui récupère et renvoie la liste des columns
      * @returns 
      */
     public async loadColumns(): Promise<IColumn[] | null> {

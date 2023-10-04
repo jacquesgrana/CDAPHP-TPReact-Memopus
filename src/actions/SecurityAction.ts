@@ -14,7 +14,7 @@ import IUser from "../interfaces/IUser";
  * SecurityService aux observers pour la mise à jour de 
  * l'affichage du header.
  * Et redirection vers la homepage en cas de succès
- * et vers la page de login sinon.
+ * ou vers la page de login sinon.
  * @param param0 
  * @returns 
  */
@@ -42,5 +42,4 @@ export const actionLogin = async({request}: ActionFunctionArgs) => {
         toast.error('Utilisateur non reconnu');
         return redirect("/connect");
     }
-    //return { redirect: isConnected ? '/home' : '/connect' };
 }

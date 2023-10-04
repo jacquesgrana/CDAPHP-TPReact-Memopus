@@ -21,7 +21,7 @@ export default class JsonCardService {
       }
 
     /**
-     * Fonction qui récupère et renvoi la liste des cards
+     * Fonction qui récupère et renvoie la liste des cards
      * @returns 
      */
     public async loadCards(): Promise<ICard[] | null> {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SecurityService from '../services/SecurityService';
 import { ToastContainer } from 'react-toastify';
@@ -18,7 +18,7 @@ function App() {
   const [isLogged, setIsLogged] = useState<boolean>(security.isLogged);
 
   Modal.setAppElement('#root');
-  // ne sert a rien ?
+
   useEffect(() => {
     if (security.isLogged === false) {
       navigate('/connect', { replace: true });
@@ -27,12 +27,12 @@ function App() {
     else {
       setIsLogged(true);
     }
-  }, [security.isLogged]); // <-- modifier?
+  }, []);
 
   return (
     <div className="App container" id="container_all">
       <ToastContainer />
-      <Header isLogged={isLogged}></Header>
+      <Header></Header>
       <main>
         <Outlet />
       </main>

@@ -5,8 +5,14 @@ import ReactModal from "react-modal";
 import { useFetcher } from "react-router-dom";
 import LoadTermObservable from "../observables/LoadTermObservable";
 import { toast } from "react-toastify";
+import TermsProps from "../props/TermsProps";
 
-const Term = (props: any) => {
+/**
+ * Composant des termes, appelle une callback de Home qui 
+ * met à jour les filtre choisi
+ * @returns 
+ */
+const Term = (props: TermsProps) => {
   const [terms, setTerms] = useState<ITerm[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
@@ -18,7 +24,6 @@ const Term = (props: any) => {
   const termService = JsonTermService.getInstance();
   const termObservable = LoadTermObservable.getInstance();
   
-
   useEffect(() => {
     loadTerms(true);
     termObservable.addListener(loadTerms);
@@ -30,24 +35,40 @@ const Term = (props: any) => {
 
   useEffect(() => {}, [terms]);
 
+  /**
+   * Fonction qui ouvre la modale d'ajout d'un term
+   */
   function openModalTerm() {
     setIsModalOpen(true);
   }
 
+   /**
+   * Fonction qui ferme la modale d'ajout d'un term
+   */
   function closeModalTerm() {
     setIsModalOpen(false);
   }
 
+  /**
+   * Fonction qui ouvre la modale de confirmation 
+   * et stocke l'id dans un useRef
+   * @param id 
+   */
   const deleteTerm = (id: number) => {
     idTerm.current = id;
     setIsDeleteConfirmationOpen(true);
   };
 
+  /**
+   * Fonction qui demande la requete de suppression
+   */
   const confirmDelete = async () => {
     try {
       await termService.deleteTerm(idTerm.current);
       toast.success('Terme supprimé avec succès');
       setIsDeleteConfirmationOpen(false);
+      term.current = "TOUS";
+      props.setTerm(term.current);
       termObservable.reloadTerms = true;
       termObservable.notifyListeners();
     } 
@@ -56,10 +77,17 @@ const Term = (props: any) => {
     }
   };
 
+  /**
+   * Fonction qui ferme la modale de confirmation
+   */
   const cancelDelete = () => {
     setIsDeleteConfirmationOpen(false);
   };
 
+  /**
+   * Fonction qui charge la liste des terms
+   * @param reload 
+   */
   const loadTerms = async (reload: boolean) => {
     if (reload) {
       const loadedTerms = await termService.loadTerms();

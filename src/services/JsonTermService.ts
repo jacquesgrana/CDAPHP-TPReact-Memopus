@@ -21,7 +21,7 @@ export default class JsonTermService {
   }
 
      /**
-     * Fonction qui récupère et renvoi la liste des terms
+     * Fonction qui récupère et renvoie la liste des terms
      * @returns 
      */
   public async loadTerms(): Promise<ITerm[] | null> {

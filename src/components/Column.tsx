@@ -4,6 +4,7 @@ import Card from "./Card";
 import { useFetcher } from "react-router-dom";
 import ReactModal from "react-modal";
 import ITerm from "../interfaces/ITerm";
+import ColumnProps from "../props/ColumnProps";
 
 /**
  * Composant Column représentant une colonne 
@@ -12,7 +13,7 @@ import ITerm from "../interfaces/ITerm";
  * @returns 
  */
   // TODO faire interface pour typer les props
-const Column = (props: any) => {
+const Column = (props: ColumnProps) => {
   const [isModalCardOpen, setIsModalCardOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -122,7 +123,7 @@ const Column = (props: any) => {
               name="tid"
               id="tid"
             >
-              {props.terms.map((term: ITerm) => {
+              {props.terms?.map((term: ITerm) => {
                 return (
                   <option key={term.id} value={term.id}>
                     {term.name}

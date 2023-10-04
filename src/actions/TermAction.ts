@@ -37,5 +37,4 @@ export const actionAddTerm = async({request}: ActionFunctionArgs) => {
             return redirect("/home");
         }
     }
-
 }
