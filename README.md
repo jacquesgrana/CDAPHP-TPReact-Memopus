@@ -20,7 +20,7 @@ npm i
 
 ## lancement json-server
 
-- dans un terminal ouvert dans le dossier contenant db.json :
+- dans un terminal ouvert ouvert à la racine du projet où il y a le fichier db.json :
 
 ```bash
 json-server --watch db.json --port 3001
