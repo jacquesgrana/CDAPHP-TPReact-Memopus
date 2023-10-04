@@ -31,15 +31,12 @@ export default class SecurityService {
    * Design pattern observer pour répercuter isLogged
    */
   public notifyListeners() {
-    //console.log('notify :');
-    //console.log('listeners :', this.listeners)
     this.listeners.forEach((listener) => {
       listener(this._isLogged);
     });
   }
 
   public addListener(listener: Function): void {
-    //console.log('add listener')
     this.listeners.push(listener);
   }
 
